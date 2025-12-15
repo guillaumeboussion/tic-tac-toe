@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lottie/lottie.dart';
 import 'package:tic_tac_toe_app/constants/assets.dart';
 import 'package:tic_tac_toe_app/core/design/theme/data/radius.dart';
 import 'package:tic_tac_toe_app/core/design/theme/theme.dart';
@@ -18,57 +17,51 @@ class TrophyCounterWidget extends ConsumerWidget {
     final trophyCountAsync = ref.watch(trophyCountProvider);
 
     return GestureDetector(
-      onTap: () {
-        context.router.push(const GameHistoryRoute());
-      },
+      onTap: () => context.router.push(const GameHistoryRoute()),
       child: Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: theme.spacing.small,
-        vertical: theme.spacing.xs,
-      ),
-      decoration: BoxDecoration(
-        color: theme.colors.primaryColor.withValues(alpha: 0.7),
-        borderRadius: theme.radius.xs.asBorderRadius,
-        border: Border.all(
-          color: theme.colors.trophyColor.withValues(alpha: 0.4),
-          width: 1.5,
+        padding: EdgeInsets.symmetric(
+          horizontal: theme.spacing.small,
+          vertical: theme.spacing.xs,
         ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            width: 16,
-            height: 16,
-            child: Lottie.asset(
-              Assets.lottieTrophy,
-              fit: BoxFit.contain,
-              animate: false,
-            ),
+        decoration: BoxDecoration(
+          color: theme.colors.primaryColor.withValues(alpha: 0.7),
+          borderRadius: theme.radius.xs.asBorderRadius,
+          border: Border.all(
+            color: theme.colors.trophyColor.withValues(alpha: 0.4),
+            width: 1.5,
           ),
-          SizedBox(width: theme.spacing.xs),
-          trophyCountAsync.when(
-            data: (count) => AppText.smallBody(
-              count.toString(),
-              color: theme.colors.trophyColor,
-              fontWeight: FontWeight.w600,
-            ),
-            loading: () => SizedBox(
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
               width: 12,
               height: 12,
-              child: CircularProgressIndicator(
-                strokeWidth: 1.5,
-                valueColor: AlwaysStoppedAnimation<Color>(theme.colors.trophyColor),
+              child: Image.asset(Assets.trophyIcon),
+            ),
+            SizedBox(width: theme.spacing.xs),
+            trophyCountAsync.when(
+              data: (count) => AppText.regularBody(
+                count.toString(),
+                color: theme.colors.trophyColor,
+                fontWeight: FontWeight.w600,
+              ),
+              loading: () => SizedBox(
+                width: 12,
+                height: 12,
+                child: CircularProgressIndicator(
+                  strokeWidth: 1.5,
+                  valueColor: AlwaysStoppedAnimation<Color>(theme.colors.trophyColor),
+                ),
+              ),
+              error: (_, __) => AppText.regularBody(
+                '0',
+                color: theme.colors.trophyColor,
+                fontWeight: FontWeight.w600,
               ),
             ),
-            error: (_, __) => AppText.smallBody(
-              '0',
-              color: theme.colors.trophyColor,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
+          ],
+        ),
       ),
     );
   }
