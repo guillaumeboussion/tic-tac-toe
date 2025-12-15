@@ -3,10 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tic_tac_toe_app/core/design/theme/theme.dart';
 import 'package:tic_tac_toe_app/core/design/widgets/base/text.dart';
 import 'package:tic_tac_toe_app/core/presentation/providers/l10n_provider.dart';
+import 'package:tic_tac_toe_app/features/game/domain/entities/game_statistics.dart';
 import 'package:tic_tac_toe_app/features/game/presentation/components/game_history_page/stat_item.dart';
 
 class StatisticsCard extends ConsumerWidget {
-  final dynamic statistics;
+  final GameStatistics statistics;
 
   const StatisticsCard({super.key, required this.statistics});
 
@@ -27,37 +28,18 @@ class StatisticsCard extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              AppText.xxlBoldTitle(
-                '${statistics.totalTrophies}',
-                color: theme.colors.trophyColor,
-              ),
+              AppText.xxlBoldTitle('${statistics.totalTrophies}', color: theme.colors.trophyColor),
               SizedBox(width: theme.spacing.xs),
-              AppText.largeBody(
-                l10n.trophies,
-                color: theme.colors.primaryText,
-                fontWeight: FontWeight.w600,
-              ),
+              AppText.largeBody(l10n.trophies, color: theme.colors.primaryText, fontWeight: FontWeight.w600),
             ],
           ),
           SizedBox(height: theme.spacing.regular),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              StatItem(
-                label: l10n.wins,
-                value: statistics.wins.toString(),
-                color: theme.colors.success,
-              ),
-              StatItem(
-                label: l10n.draws,
-                value: statistics.draws.toString(),
-                color: theme.colors.warning,
-              ),
-              StatItem(
-                label: l10n.losses,
-                value: statistics.losses.toString(),
-                color: theme.colors.error,
-              ),
+              StatItem(label: l10n.wins, value: statistics.wins.toString(), color: theme.colors.success),
+              StatItem(label: l10n.draws, value: statistics.draws.toString(), color: theme.colors.warning),
+              StatItem(label: l10n.losses, value: statistics.losses.toString(), color: theme.colors.error),
             ],
           ),
         ],

@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:tic_tac_toe_app/core/design/theme/data/data.dart';
 import 'package:tic_tac_toe_app/core/design/theme/theme.dart';
 import 'package:tic_tac_toe_app/core/design/widgets/base/text.dart';
+import 'package:tic_tac_toe_app/core/l10n/app_localizations.dart';
 import 'package:tic_tac_toe_app/core/presentation/providers/l10n_provider.dart';
 import 'package:tic_tac_toe_app/features/game/domain/entities/game_entity.dart';
 import 'package:tic_tac_toe_app/features/game/domain/enums/game_opponent.dart';
@@ -46,7 +47,7 @@ class GameHistoryCard extends ConsumerWidget {
     }
   }
 
-  String _getResultText(GameResult result, dynamic l10n) {
+  String _getResultText(GameResult result, AppLocalizations l10n) {
     switch (result) {
       case GameResult.victory:
         return l10n.victory;
@@ -57,7 +58,7 @@ class GameHistoryCard extends ConsumerWidget {
     }
   }
 
-  String _getOpponentText(GameOpponent opponent, dynamic l10n) {
+  String _getOpponentText(GameOpponent opponent, AppLocalizations l10n) {
     switch (opponent) {
       case GameOpponent.ai:
         return l10n.ai;
@@ -77,10 +78,7 @@ class GameHistoryCard extends ConsumerWidget {
       decoration: BoxDecoration(
         color: theme.colors.primaryColor.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(theme.radius.small.x),
-        border: Border.all(
-          color: resultColor.withValues(alpha: 0.3),
-          width: 1.5,
-        ),
+        border: Border.all(color: resultColor.withValues(alpha: 0.3), width: 1.5),
       ),
       child: Row(
         children: [
@@ -91,12 +89,7 @@ class GameHistoryCard extends ConsumerWidget {
               color: resultColor.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(theme.radius.small.x),
             ),
-            child: Center(
-              child: Text(
-                _getResultEmoji(game.result),
-                style: const TextStyle(fontSize: 24),
-              ),
-            ),
+            child: Center(child: Text(_getResultEmoji(game.result), style: const TextStyle(fontSize: 24))),
           ),
           SizedBox(width: theme.spacing.small),
           Expanded(
@@ -105,10 +98,7 @@ class GameHistoryCard extends ConsumerWidget {
               children: [
                 Row(
                   children: [
-                    AppText.regularBoldBody(
-                      _getResultText(game.result, l10n),
-                      color: resultColor,
-                    ),
+                    AppText.regularBoldBody(_getResultText(game.result, l10n), color: resultColor),
                     SizedBox(width: theme.spacing.xs),
                     AppText.smallBody(
                       'vs ${_getOpponentText(game.opponent, l10n)}',
@@ -119,11 +109,7 @@ class GameHistoryCard extends ConsumerWidget {
                 SizedBox(height: theme.spacing.semiXs),
                 Row(
                   children: [
-                    Icon(
-                      Icons.timer_outlined,
-                      size: 14,
-                      color: theme.colors.primaryText.withValues(alpha: 0.5),
-                    ),
+                    Icon(Icons.timer_outlined, size: 14, color: theme.colors.primaryText.withValues(alpha: 0.5)),
                     SizedBox(width: theme.spacing.semiXs),
                     AppText.smallBody(
                       _formatDuration(game.partyTime),
@@ -146,10 +132,7 @@ class GameHistoryCard extends ConsumerWidget {
                   ],
                 ),
                 SizedBox(height: theme.spacing.semiXs),
-                AppText.xsBody(
-                  _formatDate(game.timestamp),
-                  color: theme.colors.primaryText.withValues(alpha: 0.5),
-                ),
+                AppText.xsBody(_formatDate(game.timestamp), color: theme.colors.primaryText.withValues(alpha: 0.5)),
               ],
             ),
           ),
