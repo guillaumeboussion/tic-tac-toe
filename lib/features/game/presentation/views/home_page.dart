@@ -145,17 +145,23 @@ class _HomePageState extends ConsumerState<HomePage>
                             color: colors.primaryText,
                           ),
                           SizedBox(height: spacing.big),
-                          SelectGameOpponentWidget(
-                            gameOpponent: GameOpponent.ai,
-                            onTap: () => context.router.push(
-                              GameRoute(opponentParam: 'ai'),
+                          ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 600),
+                            child: SelectGameOpponentWidget(
+                              gameOpponent: GameOpponent.ai,
+                              onTap: () => context.router.push(
+                                GameRoute(opponentParam: 'ai'),
+                              ),
                             ),
                           ),
                           SizedBox(height: spacing.big),
-                          SelectGameOpponentWidget(
-                            gameOpponent: GameOpponent.friend,
-                            onTap: () => context.router.push(
-                              GameRoute(opponentParam: 'friend'),
+                          ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 600),
+                            child: SelectGameOpponentWidget(
+                              gameOpponent: GameOpponent.friend,
+                              onTap: () => context.router.push(
+                                GameRoute(opponentParam: 'friend'),
+                              ),
                             ),
                           ),
                         ],

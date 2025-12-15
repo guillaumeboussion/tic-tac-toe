@@ -229,44 +229,47 @@ class _GamePageState extends ConsumerState<GamePage>
               SizedBox(height: theme.spacing.big),
               Expanded(
                 child: Center(
-                  child: AspectRatio(
-                    aspectRatio: 1,
-                    child: Container(
-                      padding: EdgeInsets.all(theme.spacing.regular),
-                      decoration: BoxDecoration(
-                        color: theme.colors.secondaryColor,
-                        borderRadius: theme.radius.regular.asBorderRadius,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.3),
-                            blurRadius: 20,
-                            spreadRadius: 5,
-                          ),
-                        ],
-                      ),
-                      child: GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              crossAxisSpacing: 12,
-                              mainAxisSpacing: 12,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 600),
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: Container(
+                        padding: EdgeInsets.all(theme.spacing.regular),
+                        decoration: BoxDecoration(
+                          color: theme.colors.secondaryColor,
+                          borderRadius: theme.radius.regular.asBorderRadius,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.3),
+                              blurRadius: 20,
+                              spreadRadius: 5,
                             ),
-                        itemCount: 9,
-                        itemBuilder: (context, index) {
-                          final cellState = gameState.board[index];
-                          final isWinningCell =
-                              gameState is GameOverState &&
-                              gameState.winningLine?.contains(index) == true;
+                          ],
+                        ),
+                        child: GridView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                crossAxisSpacing: 12,
+                                mainAxisSpacing: 12,
+                              ),
+                          itemCount: 9,
+                          itemBuilder: (context, index) {
+                            final cellState = gameState.board[index];
+                            final isWinningCell =
+                                gameState is GameOverState &&
+                                gameState.winningLine?.contains(index) == true;
 
-                          return GameCellWidget(
-                            cellState: cellState,
-                            isWinningCell: isWinningCell,
-                            onTap: () => ref
-                                .read(gameStateProvider.notifier)
-                                .handleCellTap(index),
-                          );
-                        },
+                            return GameCellWidget(
+                              cellState: cellState,
+                              isWinningCell: isWinningCell,
+                              onTap: () => ref
+                                  .read(gameStateProvider.notifier)
+                                  .handleCellTap(index),
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ),

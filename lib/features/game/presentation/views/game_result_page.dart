@@ -167,134 +167,137 @@ class _GameResultPageState extends ConsumerState<GameResultPage>
           child: Center(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: theme.spacing.big),
-              child: AnimatedBuilder(
-                animation: _controller,
-                builder: (context, child) {
-                  return Transform.scale(
-                    scale: _scaleAnimation.value,
-                    child: Transform.rotate(
-                      angle: _rotationAnimation.value,
-                      child: child,
-                    ),
-                  );
-                },
-                child: Container(
-                  padding: EdgeInsets.all(theme.spacing.big),
-                  decoration: BoxDecoration(
-                    color: theme.colors.secondaryColor,
-                    borderRadius: theme.radius.regular.asBorderRadius,
-                    border: Border.all(
-                      color: _getResultColor(theme).withValues(alpha: 0.5),
-                      width: 2,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: _getResultColor(theme).withValues(alpha: 0.3),
-                        blurRadius: 40,
-                        spreadRadius: 10,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 600),
+                child: AnimatedBuilder(
+                  animation: _controller,
+                  builder: (context, child) {
+                    return Transform.scale(
+                      scale: _scaleAnimation.value,
+                      child: Transform.rotate(
+                        angle: _rotationAnimation.value,
+                        child: child,
                       ),
-                    ],
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Lottie.asset(
-                        _getLottie(),
-                        width: 200,
-                        height: 200,
-                        repeat: false,
-                        controller: _lottieController,
-                        onLoaded: (composition) {
-                          _lottieController.duration = composition.duration;
-                          if (widget.result == GameResult.draw) {
-                            _lottieController.animateTo(0.5);
-                          } else {
-                            _lottieController.forward();
-                          }
-                        },
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(theme.spacing.big),
+                    decoration: BoxDecoration(
+                      color: theme.colors.secondaryColor,
+                      borderRadius: theme.radius.regular.asBorderRadius,
+                      border: Border.all(
+                        color: _getResultColor(theme).withValues(alpha: 0.5),
+                        width: 2,
                       ),
-                      SizedBox(height: theme.spacing.regular),
-                      Text(
-                        _getTitle(context),
-                        style: theme.typography.page.xxlBoldTitle.copyWith(
-                          color: _getResultColor(theme),
-                          fontSize: 42,
-                          fontWeight: FontWeight.w900,
-                          shadows: [
-                            Shadow(
-                              color: _getResultColor(
-                                theme,
-                              ).withValues(alpha: 0.5),
-                              blurRadius: 20,
-                            ),
-                          ],
+                      boxShadow: [
+                        BoxShadow(
+                          color: _getResultColor(theme).withValues(alpha: 0.3),
+                          blurRadius: 40,
+                          spreadRadius: 10,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                      if (widget.trophiesWon != null &&
-                          widget.trophiesWon! != 0) ...[
-                        SizedBox(height: theme.spacing.semiBig),
-                        FadeTransition(
-                          opacity: _fadeAnimation,
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: theme.spacing.regular,
-                              vertical: theme.spacing.small,
-                            ),
-                            decoration: BoxDecoration(
-                              color:
-                                  (widget.trophiesWon! > 0
-                                          ? theme.colors.success
-                                          : theme.colors.error)
-                                      .withValues(alpha: 0.2),
-                              borderRadius: theme.radius.small.asBorderRadius,
-                              border: Border.all(
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Lottie.asset(
+                          _getLottie(),
+                          width: 200,
+                          height: 200,
+                          repeat: false,
+                          controller: _lottieController,
+                          onLoaded: (composition) {
+                            _lottieController.duration = composition.duration;
+                            if (widget.result == GameResult.draw) {
+                              _lottieController.animateTo(0.5);
+                            } else {
+                              _lottieController.forward();
+                            }
+                          },
+                        ),
+                        SizedBox(height: theme.spacing.regular),
+                        Text(
+                          _getTitle(context),
+                          style: theme.typography.page.xxlBoldTitle.copyWith(
+                            color: _getResultColor(theme),
+                            fontSize: 42,
+                            fontWeight: FontWeight.w900,
+                            shadows: [
+                              Shadow(
+                                color: _getResultColor(
+                                  theme,
+                                ).withValues(alpha: 0.5),
+                                blurRadius: 20,
+                              ),
+                            ],
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        if (widget.trophiesWon != null &&
+                            widget.trophiesWon! != 0) ...[
+                          SizedBox(height: theme.spacing.semiBig),
+                          FadeTransition(
+                            opacity: _fadeAnimation,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: theme.spacing.regular,
+                                vertical: theme.spacing.small,
+                              ),
+                              decoration: BoxDecoration(
                                 color:
                                     (widget.trophiesWon! > 0
                                             ? theme.colors.success
                                             : theme.colors.error)
-                                        .withValues(alpha: 0.5),
+                                        .withValues(alpha: 0.2),
+                                borderRadius: theme.radius.small.asBorderRadius,
+                                border: Border.all(
+                                  color:
+                                      (widget.trophiesWon! > 0
+                                              ? theme.colors.success
+                                              : theme.colors.error)
+                                          .withValues(alpha: 0.5),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    widget.trophiesWon! > 0 ? '🏆' : '💔',
+                                    style: const TextStyle(fontSize: 24),
+                                  ),
+                                  SizedBox(width: theme.spacing.semiSmall),
+                                  AppText.mediumBoldBody(
+                                    '${widget.trophiesWon! > 0 ? '+' : ''}${widget.trophiesWon} ${l10n.trophies}',
+                                    color: widget.trophiesWon! > 0
+                                        ? theme.colors.success
+                                        : theme.colors.error,
+                                  ),
+                                ],
                               ),
                             ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  widget.trophiesWon! > 0 ? '🏆' : '💔',
-                                  style: const TextStyle(fontSize: 24),
-                                ),
-                                SizedBox(width: theme.spacing.semiSmall),
-                                AppText.mediumBoldBody(
-                                  '${widget.trophiesWon! > 0 ? '+' : ''}${widget.trophiesWon} ${l10n.trophies}',
-                                  color: widget.trophiesWon! > 0
-                                      ? theme.colors.success
-                                      : theme.colors.error,
-                                ),
-                              ],
-                            ),
+                          ),
+                        ],
+                        SizedBox(height: theme.spacing.big),
+                        FadeTransition(
+                          opacity: _fadeAnimation,
+                          child: Column(
+                            children: [
+                              AppSuccessButton(
+                                text: l10n.new_game,
+                                onPressed: _handleNewGame,
+                                leadingIcon: Icons.replay,
+                              ),
+                              SizedBox(height: theme.spacing.regular),
+                              AppSecondaryButton.bold(
+                                text: l10n.back_to_home,
+                                onPressed: _handleBackToHome,
+                                leadingIcon: Icons.home,
+                              ),
+                            ],
                           ),
                         ),
                       ],
-                      SizedBox(height: theme.spacing.big),
-                      FadeTransition(
-                        opacity: _fadeAnimation,
-                        child: Column(
-                          children: [
-                            AppSuccessButton(
-                              text: l10n.new_game,
-                              onPressed: _handleNewGame,
-                              leadingIcon: Icons.replay,
-                            ),
-                            SizedBox(height: theme.spacing.regular),
-                            AppSecondaryButton.bold(
-                              text: l10n.back_to_home,
-                              onPressed: _handleBackToHome,
-                              leadingIcon: Icons.home,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),

@@ -30,51 +30,130 @@ class GameHistoryPage extends ConsumerWidget {
         },
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
-          child: Padding(
-            padding: EdgeInsets.all(theme.spacing.regular),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                statisticsAsync.when(
-                  data: (stats) => StatisticsCard(statistics: stats),
-                  loading: () => const Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(24.0),
-                      child: CircularProgressIndicator(),
-                    ),
-                  ),
-                  error: (_, __) => const SizedBox.shrink(),
-                ),
-                SizedBox(height: theme.spacing.regular),
-                historyAsync.when(
-                  data: (games) => games.isEmpty
-                      ? const EmptyHistoryWidget()
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            AppText.mediumBoldTitle(l10n.previous_games),
-                            SizedBox(height: theme.spacing.small),
-                            ...games.map(
-                              (game) => Padding(
-                                padding: EdgeInsets.only(
-                                  bottom: theme.spacing.small,
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1200),
+              child: Padding(
+                padding: EdgeInsets.all(theme.spacing.regular),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final isWideScreen = constraints.maxWidth > 800;
+
+                    if (isWideScreen) {
+                      // Side-by-side layout for wide screens
+                      return Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Game history column
+                          Flexible(
+                            flex: 1,
+                            child: historyAsync.when(
+                              data: (games) => games.isEmpty
+                                  ? const EmptyHistoryWidget()
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        AppText.mediumBoldTitle(
+                                          l10n.previous_games,
+                                        ),
+                                        SizedBox(height: theme.spacing.small),
+                                        ...games.map(
+                                          (game) => Padding(
+                                            padding: EdgeInsets.only(
+                                              bottom: theme.spacing.small,
+                                            ),
+                                            child: GameHistoryCard(game: game),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                              loading: () => const Center(
+                                child: Padding(
+                                  padding: EdgeInsets.all(24.0),
+                                  child: CircularProgressIndicator(),
                                 ),
-                                child: GameHistoryCard(game: game),
+                              ),
+                              error: (_, __) => Center(
+                                child: AppText.regularBody(
+                                  l10n.error_loading_history,
+                                ),
                               ),
                             ),
-                          ],
-                        ),
-                  loading: () => const Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(24.0),
-                      child: CircularProgressIndicator(),
-                    ),
-                  ),
-                  error: (_, __) => Center(
-                    child: AppText.regularBody(l10n.error_loading_history),
-                  ),
+                          ),
+                          SizedBox(width: theme.spacing.big),
+                          // Statistics column
+                          Flexible(
+                            flex: 1,
+                            child: statisticsAsync.when(
+                              data: (stats) =>
+                                  StatisticsCard(statistics: stats),
+                              loading: () => const Center(
+                                child: Padding(
+                                  padding: EdgeInsets.all(24.0),
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
+                              error: (_, __) => const SizedBox.shrink(),
+                            ),
+                          ),
+                        ],
+                      );
+                    } else {
+                      // Vertical layout for narrow screens
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          statisticsAsync.when(
+                            data: (stats) => StatisticsCard(statistics: stats),
+                            loading: () => const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(24.0),
+                                child: CircularProgressIndicator(),
+                              ),
+                            ),
+                            error: (_, __) => const SizedBox.shrink(),
+                          ),
+                          SizedBox(height: theme.spacing.regular),
+                          historyAsync.when(
+                            data: (games) => games.isEmpty
+                                ? const EmptyHistoryWidget()
+                                : Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      AppText.mediumBoldTitle(
+                                        l10n.previous_games,
+                                      ),
+                                      SizedBox(height: theme.spacing.small),
+                                      ...games.map(
+                                        (game) => Padding(
+                                          padding: EdgeInsets.only(
+                                            bottom: theme.spacing.small,
+                                          ),
+                                          child: GameHistoryCard(game: game),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                            loading: () => const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(24.0),
+                                child: CircularProgressIndicator(),
+                              ),
+                            ),
+                            error: (_, __) => Center(
+                              child: AppText.regularBody(
+                                l10n.error_loading_history,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                  },
                 ),
-              ],
+              ),
             ),
           ),
         ),
