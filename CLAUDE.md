@@ -114,5 +114,8 @@ final typography = AppTheme.of(context).typography;
 NEVER USE custom int value for spacing (using SizedBox ie)
 ALWAYS USE theme colors
 
+### Running commands
+ALWAYS USE `fvm` when running flutter or dart commands
+
 ### No Test Suite
 There is currently no `test/` directory. When adding tests, create the directory structure and use `flutter test` to run them.
