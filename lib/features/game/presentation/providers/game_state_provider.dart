@@ -16,7 +16,7 @@ class GameStateNotifier extends StateNotifier<GameState> {
   final Random _random = Random();
 
   GameStateNotifier()
-      : super(GameState(
+      : super(GameState.playing(
           board: List.filled(9, CellState.empty),
           currentPlayer: CellState.playerOne,
           opponent: GameOpponent.ai,
@@ -26,7 +26,7 @@ class GameStateNotifier extends StateNotifier<GameState> {
     // Randomly select first player when playing against AI
     final currentPlayer = opponent == GameOpponent.ai && _random.nextBool() ? CellState.playerTwo : CellState.playerOne;
 
-    state = GameState(
+    state = GameState.playing(
       board: List.filled(9, CellState.empty),
       currentPlayer: currentPlayer,
       opponent: opponent,
@@ -43,7 +43,7 @@ class GameStateNotifier extends StateNotifier<GameState> {
       currentPlayer = CellState.playerOne;
     }
 
-    state = GameState(
+    state = GameState.playing(
       board: List.filled(9, CellState.empty),
       currentPlayer: currentPlayer,
       opponent: state.opponent,
@@ -51,23 +51,23 @@ class GameStateNotifier extends StateNotifier<GameState> {
   }
 
   Future<void> makeMove(int index, GameOpponent playerType) async {
-    if (state.isGameOver || (state.isProcessing && playerType != GameOpponent.ai)) return;
+    if (state is GameOverState || (state is PlayingGameState && (state as PlayingGameState).isProcessing && playerType != GameOpponent.ai)) return;
     if (state.board[index] != CellState.empty) return;
 
     final newBoard = List<CellState>.from(state.board);
     newBoard[index] = state.currentPlayer;
 
-    state = state.copyWith(board: newBoard);
+    state = (state as PlayingGameState).copyWith(board: newBoard);
 
     _checkGameOver();
 
-    if (!state.isGameOver) {
+    if (state is! GameOverState) {
       _switchPlayer();
     }
   }
 
   void _switchPlayer() {
-    state = state.copyWith(
+    state = (state as PlayingGameState).copyWith(
       currentPlayer: state.currentPlayer == CellState.playerOne ? CellState.playerTwo : CellState.playerOne,
     );
   }
@@ -78,9 +78,21 @@ class GameStateNotifier extends StateNotifier<GameState> {
     if (winningLine != null) {
       final winner = state.board[winningLine.first];
       final result = winner == CellState.playerOne ? GameResult.victory : GameResult.defeat;
-      state = state.copyWith(result: result, winningLine: winningLine);
+      state = GameState.gameOver(
+        board: state.board,
+        currentPlayer: state.currentPlayer,
+        opponent: state.opponent,
+        result: result,
+        winningLine: winningLine,
+      );
     } else if (state.isBoardFull) {
-      state = state.copyWith(result: GameResult.draw);
+      state = GameState.gameOver(
+        board: state.board,
+        currentPlayer: state.currentPlayer,
+        opponent: state.opponent,
+        result: GameResult.draw,
+        winningLine: null,
+      );
     }
   }
 
@@ -115,19 +127,24 @@ class GameStateNotifier extends StateNotifier<GameState> {
 }
 
 @freezed
-class GameState with _$GameState {
+sealed class GameState with _$GameState {
   const GameState._();
 
-  const factory GameState({
+  const factory GameState.playing({
     required List<CellState> board,
     required CellState currentPlayer,
-    GameResult? result,
-    List<int>? winningLine,
     required GameOpponent opponent,
     @Default(false) bool isProcessing,
-  }) = _GameState;
+  }) = PlayingGameState;
 
-  bool get isGameOver => result != null;
+  const factory GameState.gameOver({
+    required List<CellState> board,
+    required CellState currentPlayer,
+    required GameOpponent opponent,
+    required GameResult result,
+    required List<int>? winningLine,
+    @Default(false) bool isProcessing,
+  }) = GameOverState;
 
   bool get isBoardFull => !board.contains(CellState.empty);
 }

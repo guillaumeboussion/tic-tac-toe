@@ -19,7 +19,8 @@ class GameMoveHandler {
   Future<bool> handleCellTap(int index) async {
     final gameState = _ref.read(gameStateProvider);
 
-    if (gameState.isGameOver || gameState.isProcessing) return false;
+    if (gameState is GameOverState) return false;
+    if (gameState is PlayingGameState && gameState.isProcessing) return false;
     if (gameState.board[index] != CellState.empty) return false;
 
     // Player makes a move
@@ -27,7 +28,7 @@ class GameMoveHandler {
 
     // Check if game is over
     final updatedState = _ref.read(gameStateProvider);
-    if (updatedState.isGameOver) {
+    if (updatedState is GameOverState) {
       return true; // Game ended
     }
 
@@ -36,7 +37,7 @@ class GameMoveHandler {
       await triggerAIMove();
 
       final finalState = _ref.read(gameStateProvider);
-      return finalState.isGameOver;
+      return finalState is GameOverState;
     }
 
     return false;

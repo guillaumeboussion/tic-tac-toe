@@ -11,7 +11,7 @@ class GameEntity with _$GameEntity {
     required String id,
     required GameResult result,
     required DateTime timestamp,
-    required int trophiesWon,
+    required int? trophiesWon,
     required Duration partyTime,
     required GameOpponent opponent,
   }) = _GameEntity;

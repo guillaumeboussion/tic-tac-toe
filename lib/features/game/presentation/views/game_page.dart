@@ -20,10 +20,7 @@ import 'package:tic_tac_toe_app/features/game/presentation/providers/game_timer_
 class GamePage extends ConsumerStatefulWidget {
   final GameOpponent opponent;
 
-  const GamePage({
-    required this.opponent,
-    super.key,
-  });
+  const GamePage({required this.opponent, super.key});
 
   @override
   ConsumerState<GamePage> createState() => _GamePageState();
@@ -37,17 +34,13 @@ class _GamePageState extends ConsumerState<GamePage> with TickerProviderStateMix
   void initState() {
     super.initState();
 
-    _pulseController = AnimationController(
-      duration: const Duration(milliseconds: 1000),
-      vsync: this,
-    )..repeat(reverse: true);
+    _pulseController = AnimationController(duration: const Duration(milliseconds: 1000), vsync: this)
+      ..repeat(reverse: true);
 
-    _pulseAnimation = Tween<double>(begin: 1.0, end: 1.1).animate(
-      CurvedAnimation(
-        parent: _pulseController,
-        curve: Curves.easeInOut,
-      ),
-    );
+    _pulseAnimation = Tween<double>(
+      begin: 1.0,
+      end: 1.1,
+    ).animate(CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut));
 
     // Initialize game
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -92,19 +85,14 @@ class _GamePageState extends ConsumerState<GamePage> with TickerProviderStateMix
 
     // Listen for game state changes to trigger navigation
     ref.listen<GameState>(gameStateProvider, (previous, next) async {
-      if (next.isGameOver && previous?.isGameOver != true) {
+      if (next is GameOverState && previous is! GameOverState) {
         final gameEndData = await ref.read(gameControllerProvider).handleGameEnd();
 
         // Voluntary away few milliseconds to allow UI to update before navigation
         await Future.delayed(const Duration(milliseconds: 300));
 
         if (gameEndData != null && context.mounted) {
-          context.router.push(
-            GameResultRoute(
-              result: gameEndData.result,
-              trophiesWon: gameEndData.trophiesWon,
-            ),
-          );
+          context.router.push(GameResultRoute(result: gameEndData.result, trophiesWon: gameEndData.trophiesWon));
         }
       }
     });
@@ -120,29 +108,17 @@ class _GamePageState extends ConsumerState<GamePage> with TickerProviderStateMix
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: theme.colors.primaryText,
-                    ),
+                    icon: Icon(Icons.arrow_back, color: theme.colors.primaryText),
                     onPressed: () => context.router.back(),
                   ),
                   Column(
                     children: [
-                      AppText.smallBody(
-                        l10n.game_time,
-                        color: theme.colors.secondaryText,
-                      ),
-                      AppText.mediumBoldBody(
-                        _formatDuration(elapsedTime),
-                        color: theme.colors.primaryText,
-                      ),
+                      AppText.smallBody(l10n.game_time, color: theme.colors.secondaryText),
+                      AppText.mediumBoldBody(_formatDuration(elapsedTime), color: theme.colors.primaryText),
                     ],
                   ),
                   IconButton(
-                    icon: Icon(
-                      Icons.refresh,
-                      color: theme.colors.primaryText,
-                    ),
+                    icon: Icon(Icons.refresh, color: theme.colors.primaryText),
                     onPressed: _handleReset,
                   ),
                 ],
@@ -151,10 +127,7 @@ class _GamePageState extends ConsumerState<GamePage> with TickerProviderStateMix
 
               // Game Mode Badge
               Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: theme.spacing.regular,
-                  vertical: theme.spacing.semiSmall,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: theme.spacing.regular, vertical: theme.spacing.semiSmall),
                 decoration: BoxDecoration(
                   color: theme.colors.secondaryColor,
                   borderRadius: theme.radius.small.asBorderRadius,
@@ -180,17 +153,11 @@ class _GamePageState extends ConsumerState<GamePage> with TickerProviderStateMix
                   final indicatorColor = isPlayerOneTurn ? theme.colors.playerOneColor : theme.colors.playerTwoColor;
 
                   return Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: theme.spacing.regular,
-                      vertical: theme.spacing.small,
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: theme.spacing.regular, vertical: theme.spacing.small),
                     decoration: BoxDecoration(
                       color: indicatorColor.withValues(alpha: 0.2),
                       borderRadius: theme.radius.small.asBorderRadius,
-                      border: Border.all(
-                        color: indicatorColor,
-                        width: 2,
-                      ),
+                      border: Border.all(color: indicatorColor, width: 2),
                       boxShadow: [
                         BoxShadow(
                           color: indicatorColor.withValues(alpha: 0.3),
@@ -208,17 +175,13 @@ class _GamePageState extends ConsumerState<GamePage> with TickerProviderStateMix
                           size: 20,
                         ),
                         SizedBox(width: theme.spacing.semiSmall),
-                        AppText.mediumBoldBody(
-                          _getTurnText(gameState, l10n),
-                          color: indicatorColor,
-                        ),
+                        AppText.mediumBoldBody(_getTurnText(gameState, l10n), color: indicatorColor),
                       ],
                     ),
                   );
                 },
               ),
               SizedBox(height: theme.spacing.big),
-
               Expanded(
                 child: Center(
                   child: AspectRatio(
@@ -229,11 +192,7 @@ class _GamePageState extends ConsumerState<GamePage> with TickerProviderStateMix
                         color: theme.colors.secondaryColor,
                         borderRadius: theme.radius.regular.asBorderRadius,
                         boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.3),
-                            blurRadius: 20,
-                            spreadRadius: 5,
-                          ),
+                          BoxShadow(color: Colors.black.withValues(alpha: 0.3), blurRadius: 20, spreadRadius: 5),
                         ],
                       ),
                       child: GridView.builder(
@@ -246,7 +205,8 @@ class _GamePageState extends ConsumerState<GamePage> with TickerProviderStateMix
                         itemCount: 9,
                         itemBuilder: (context, index) {
                           final cellState = gameState.board[index];
-                          final isWinningCell = gameState.winningLine?.contains(index) ?? false;
+                          final isWinningCell =
+                              gameState is GameOverState && gameState.winningLine?.contains(index) == true;
 
                           return GameCellWidget(
                             cellState: cellState,
@@ -264,10 +224,7 @@ class _GamePageState extends ConsumerState<GamePage> with TickerProviderStateMix
               // Bottom Actions
               SizedBox(
                 width: double.infinity,
-                child: AppOutlinedButton(
-                  text: l10n.back_to_home,
-                  onPressed: () => context.router.back(),
-                ),
+                child: AppOutlinedButton(text: l10n.back_to_home, onPressed: () => context.router.back()),
               ),
             ],
           ),

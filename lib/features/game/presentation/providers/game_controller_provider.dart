@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tic_tac_toe_app/constants/game_config.dart';
 import 'package:tic_tac_toe_app/features/game/data/repositories/game_repository.dart';
@@ -46,16 +48,16 @@ class GameController {
     final gameDuration = _ref.read(gameTimerProvider);
     final gameRepository = _ref.read(gameRepositoryProvider);
 
-    if (gameState.result == null) return null;
+    if (gameState is! GameOverState) return null;
 
     // Stop timer
     _ref.read(gameTimerProvider.notifier).stop();
 
     // Calculate trophies (only for AI games)
-    int trophiesWon = 0;
+    int? trophiesWon;
 
     if (gameState.opponent == GameOpponent.ai) {
-      switch (gameState.result!) {
+      switch (gameState.result) {
         case GameResult.victory:
           trophiesWon = GameConfig.trophiesForVictory;
         case GameResult.draw:
@@ -65,7 +67,8 @@ class GameController {
       }
 
       final currentTrophies = await gameRepository.getTrophiesCount();
-      await gameRepository.updateTrophiesCount(currentTrophies + trophiesWon);
+
+      await gameRepository.updateTrophiesCount(max(0, currentTrophies + trophiesWon));
 
       _ref.invalidate(trophyCountProvider);
     }
@@ -73,7 +76,7 @@ class GameController {
     // Save game to history
     final gameEntity = GameEntity(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
-      result: gameState.result!,
+      result: gameState.result,
       timestamp: DateTime.now(),
       trophiesWon: trophiesWon,
       partyTime: gameDuration,
@@ -83,7 +86,7 @@ class GameController {
     await gameRepository.addGameToHistory(gameEntity);
 
     return GameEndData(
-      result: gameState.result!,
+      result: gameState.result,
       trophiesWon: gameState.opponent == GameOpponent.ai ? trophiesWon : null,
       opponent: gameState.opponent,
     );
@@ -95,9 +98,5 @@ class GameEndData {
   final int? trophiesWon;
   final GameOpponent opponent;
 
-  const GameEndData({
-    required this.result,
-    required this.trophiesWon,
-    required this.opponent,
-  });
+  const GameEndData({required this.result, required this.trophiesWon, required this.opponent});
 }

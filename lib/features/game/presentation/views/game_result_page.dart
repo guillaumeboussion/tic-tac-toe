@@ -15,18 +15,13 @@ class GameResultPage extends ConsumerStatefulWidget {
   final GameResult result;
   final int? trophiesWon;
 
-  const GameResultPage({
-    required this.result,
-    this.trophiesWon,
-    super.key,
-  });
+  const GameResultPage({required this.result, this.trophiesWon, super.key});
 
   @override
   ConsumerState<GameResultPage> createState() => _GameResultPageState();
 }
 
-class _GameResultPageState extends ConsumerState<GameResultPage>
-    with SingleTickerProviderStateMixin {
+class _GameResultPageState extends ConsumerState<GameResultPage> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
   late Animation<double> _rotationAnimation;
@@ -35,10 +30,7 @@ class _GameResultPageState extends ConsumerState<GameResultPage>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 800),
-      vsync: this,
-    );
+    _controller = AnimationController(duration: const Duration(milliseconds: 800), vsync: this);
 
     _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
@@ -130,10 +122,7 @@ class _GameResultPageState extends ConsumerState<GameResultPage>
               builder: (context, child) {
                 return Transform.scale(
                   scale: _scaleAnimation.value,
-                  child: Transform.rotate(
-                    angle: _rotationAnimation.value,
-                    child: child,
-                  ),
+                  child: Transform.rotate(angle: _rotationAnimation.value, child: child),
                 );
               },
               child: Container(
@@ -141,42 +130,27 @@ class _GameResultPageState extends ConsumerState<GameResultPage>
                 decoration: BoxDecoration(
                   color: theme.colors.secondaryColor,
                   borderRadius: theme.radius.regular.asBorderRadius,
-                  border: Border.all(
-                    color: _getResultColor(theme).withValues(alpha: 0.5),
-                    width: 2,
-                  ),
+                  border: Border.all(color: _getResultColor(theme).withValues(alpha: 0.5), width: 2),
                   boxShadow: [
-                    BoxShadow(
-                      color: _getResultColor(theme).withValues(alpha: 0.3),
-                      blurRadius: 40,
-                      spreadRadius: 10,
-                    ),
+                    BoxShadow(color: _getResultColor(theme).withValues(alpha: 0.3), blurRadius: 40, spreadRadius: 10),
                   ],
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      _getEmoji(),
-                      style: const TextStyle(fontSize: 80),
-                    ),
+                    Text(_getEmoji(), style: const TextStyle(fontSize: 80)),
                     SizedBox(height: theme.spacing.regular),
                     Text(
                       _getTitle(context),
                       style: theme.typography.page.xxlBoldTitle.copyWith(
                         color: _getResultColor(theme),
-                        fontSize: 48,
+                        fontSize: 42,
                         fontWeight: FontWeight.w900,
-                        shadows: [
-                          Shadow(
-                            color: _getResultColor(theme).withValues(alpha: 0.5),
-                            blurRadius: 20,
-                          ),
-                        ],
+                        shadows: [Shadow(color: _getResultColor(theme).withValues(alpha: 0.5), blurRadius: 20)],
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    if (widget.trophiesWon != null &&
-                        widget.trophiesWon! != 0) ...[
+                    if (widget.trophiesWon != null && widget.trophiesWon! != 0) ...[
                       SizedBox(height: theme.spacing.semiBig),
                       FadeTransition(
                         opacity: _fadeAnimation,
@@ -186,31 +160,24 @@ class _GameResultPageState extends ConsumerState<GameResultPage>
                             vertical: theme.spacing.small,
                           ),
                           decoration: BoxDecoration(
-                            color: (widget.trophiesWon! > 0
-                                    ? theme.colors.success
-                                    : theme.colors.error)
-                                .withValues(alpha: 0.2),
+                            color: (widget.trophiesWon! > 0 ? theme.colors.success : theme.colors.error).withValues(
+                              alpha: 0.2,
+                            ),
                             borderRadius: theme.radius.small.asBorderRadius,
                             border: Border.all(
-                              color: (widget.trophiesWon! > 0
-                                      ? theme.colors.success
-                                      : theme.colors.error)
-                                  .withValues(alpha: 0.5),
+                              color: (widget.trophiesWon! > 0 ? theme.colors.success : theme.colors.error).withValues(
+                                alpha: 0.5,
+                              ),
                             ),
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(
-                                widget.trophiesWon! > 0 ? '🏆' : '💔',
-                                style: const TextStyle(fontSize: 24),
-                              ),
+                              Text(widget.trophiesWon! > 0 ? '🏆' : '💔', style: const TextStyle(fontSize: 24)),
                               SizedBox(width: theme.spacing.semiSmall),
                               AppText.mediumBoldBody(
                                 '${widget.trophiesWon! > 0 ? '+' : ''}${widget.trophiesWon} ${l10n.trophies}',
-                                color: widget.trophiesWon! > 0
-                                    ? theme.colors.success
-                                    : theme.colors.error,
+                                color: widget.trophiesWon! > 0 ? theme.colors.success : theme.colors.error,
                               ),
                             ],
                           ),
@@ -222,20 +189,12 @@ class _GameResultPageState extends ConsumerState<GameResultPage>
                       opacity: _fadeAnimation,
                       child: Column(
                         children: [
-                          SizedBox(
-                            width: double.infinity,
-                            child: AppPrimaryButton(
-                              text: l10n.new_game,
-                              onPressed: _handleNewGame,
-                            ),
-                          ),
+                          AppSuccessButton(text: l10n.new_game, onPressed: _handleNewGame, leadingIcon: Icons.replay),
                           SizedBox(height: theme.spacing.regular),
-                          SizedBox(
-                            width: double.infinity,
-                            child: AppSecondaryButton(
-                              text: l10n.back_to_home,
-                              onPressed: _handleBackToHome,
-                            ),
+                          AppSecondaryButton.bold(
+                            text: l10n.back_to_home,
+                            onPressed: _handleBackToHome,
+                            leadingIcon: Icons.home,
                           ),
                         ],
                       ),

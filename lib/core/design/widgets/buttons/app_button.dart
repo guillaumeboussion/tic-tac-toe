@@ -118,11 +118,7 @@ class AppPrimaryButton extends AppBaseButton {
           ? theme.typography.page.smallBoldBody.copyWith(fontWeight: FontWeight.w700)
           : theme.typography.page.smallBody,
       backgroundColor: disabled ? null : colors.primaryColor,
-      padding: padding ??
-          EdgeInsets.symmetric(
-            horizontal: theme.spacing.big,
-            vertical: theme.spacing.semiBig,
-          ),
+      padding: padding ?? EdgeInsets.symmetric(horizontal: theme.spacing.big, vertical: theme.spacing.semiBig),
       shape: RoundedRectangleBorder(
         borderRadius: radiusData != null ? BorderRadius.all(radiusData!) : BorderRadius.all(radius),
       ),
@@ -185,6 +181,53 @@ class AppSecondaryButton extends AppBaseButton {
       ),
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = AppTheme.of(context).colors;
+    final radius = AppTheme.of(context).radius.regular;
+    final theme = AppTheme.of(context);
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: radiusData != null ? BorderRadius.all(radiusData!) : BorderRadius.all(radius),
+        onTap: busy || disabled ? null : onPressed,
+        child: Container(
+          padding: padding ?? EdgeInsets.symmetric(horizontal: theme.spacing.big, vertical: theme.spacing.semiBig),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.grey.shade700, Colors.grey.shade800],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+            borderRadius: radiusData != null ? BorderRadius.all(radiusData!) : BorderRadius.all(radius),
+          ),
+          child: busy
+              ? Align(
+                  child: SizedBox.square(dimension: 24, child: CircularProgressIndicator(color: colors.primaryColor)),
+                )
+              : Center(
+                  child: BtnChild(
+                    color: foreground ?? colors.primaryText,
+                    leadingIcon: leadingIcon,
+                    leadingImage: leadingImage,
+                    suffixIcon: suffixIcon,
+                    suffixWidget: getSuffixWidget(context),
+                    textStyle: bold
+                        ? theme.typography.page.smallBoldBody.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: foreground ?? colors.primaryText,
+                          )
+                        : theme.typography.page.smallBody.copyWith(color: foreground ?? colors.primaryText),
+                    text: text,
+                    bold: bold,
+                  ),
+                ),
+        ),
+      ),
+    );
+  }
 }
 
 class AppOutlinedButton extends AppBaseButton {
@@ -237,6 +280,91 @@ class AppOutlinedButton extends AppBaseButton {
       shape: RoundedRectangleBorder(
         borderRadius: radiusData != null ? BorderRadius.all(radiusData!) : BorderRadius.all(radius),
         side: BorderSide(color: colors.primaryColor),
+      ),
+    );
+  }
+}
+
+class AppSuccessButton extends AppBaseButton {
+  const AppSuccessButton({
+    required super.text,
+    required super.onPressed,
+    super.busy = false,
+    super.disabled = false,
+    super.bold = true,
+    super.radiusData,
+    super.shadowColor,
+    super.leadingIcon,
+    super.leadingImage,
+    super.suffixIcon,
+    super.padding,
+    super.key,
+  });
+
+  @override
+  ButtonStyle getImplementationStyle(BuildContext context) {
+    final colors = AppTheme.of(context).colors;
+    final radius = AppTheme.of(context).radius.regular;
+    final theme = AppTheme.of(context);
+
+    return ElevatedButton.styleFrom(
+      foregroundColor: colors.primaryText,
+      shadowColor: shadowColor,
+      splashFactory: InkRipple.splashFactory,
+      textStyle: bold
+          ? theme.typography.page.smallBoldBody.copyWith(fontWeight: FontWeight.w700)
+          : theme.typography.page.smallBody,
+      backgroundColor: Colors.transparent,
+      padding: padding ?? EdgeInsets.symmetric(horizontal: theme.spacing.big, vertical: theme.spacing.semiBig),
+      shape: RoundedRectangleBorder(
+        borderRadius: radiusData != null ? BorderRadius.all(radiusData!) : BorderRadius.all(radius),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = AppTheme.of(context).colors;
+    final radius = AppTheme.of(context).radius.regular;
+    final theme = AppTheme.of(context);
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: radiusData != null ? BorderRadius.all(radiusData!) : BorderRadius.all(radius),
+        onTap: busy || disabled ? null : onPressed,
+        child: Container(
+          padding: padding ?? EdgeInsets.symmetric(horizontal: theme.spacing.big, vertical: theme.spacing.semiBig),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [colors.success, Color.lerp(colors.success, Colors.black, 0.2)!],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+            borderRadius: radiusData != null ? BorderRadius.all(radiusData!) : BorderRadius.all(radius),
+          ),
+          child: busy
+              ? Align(
+                  child: SizedBox.square(dimension: 24, child: CircularProgressIndicator(color: colors.primaryColor)),
+                )
+              : Center(
+                  child: BtnChild(
+                    color: colors.primaryText,
+                    leadingIcon: leadingIcon,
+                    leadingImage: leadingImage,
+                    suffixIcon: suffixIcon,
+                    suffixWidget: getSuffixWidget(context),
+                    textStyle: bold
+                        ? theme.typography.page.smallBoldBody.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: colors.primaryText,
+                          )
+                        : theme.typography.page.smallBody.copyWith(color: colors.primaryText),
+                    text: text,
+                    bold: bold,
+                  ),
+                ),
+        ),
       ),
     );
   }

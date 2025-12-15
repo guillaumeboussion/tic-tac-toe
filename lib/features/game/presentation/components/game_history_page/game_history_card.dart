@@ -130,16 +130,16 @@ class GameHistoryCard extends ConsumerWidget {
                       color: theme.colors.primaryText.withValues(alpha: 0.7),
                     ),
                     SizedBox(width: theme.spacing.small),
-                    if (game.trophiesWon != 0) ...[
+                    if (game.trophiesWon != null && game.trophiesWon != 0) ...[
                       Icon(
                         Icons.emoji_events,
                         size: 14,
-                        color: game.trophiesWon > 0 ? theme.colors.trophyColor : theme.colors.error,
+                        color: game.trophiesWon! > 0 ? theme.colors.trophyColor : theme.colors.error,
                       ),
                       SizedBox(width: theme.spacing.semiXs),
                       AppText.smallBody(
-                        '${game.trophiesWon > 0 ? '+' : ''}${game.trophiesWon}',
-                        color: game.trophiesWon > 0 ? theme.colors.trophyColor : theme.colors.error,
+                        '${game.trophiesWon! > 0 ? '+' : ''}${game.trophiesWon}',
+                        color: game.trophiesWon! > 0 ? theme.colors.trophyColor : theme.colors.error,
                         fontWeight: FontWeight.w600,
                       ),
                     ],
