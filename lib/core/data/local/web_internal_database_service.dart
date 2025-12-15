@@ -1,23 +1,23 @@
-import 'dart:io';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast_io.dart';
+import 'package:sembast_web/sembast_web.dart';
+import 'package:tic_tac_toe_app/core/domain/interfaces/i_internal_database_service.dart';
 
-final internalDatabaseServiceProvider = Provider((ref) => InternalDatabaseService());
+final webInternalDatabaseServiceProvider = Provider(
+  (ref) => InternalDatabaseService(),
+);
 
-class InternalDatabaseService {
+class InternalDatabaseService implements IInternalDatabaseService {
   Database? _database;
   String? _databasePath;
 
+  @override
   Future<void> initialize() async {
-    final Directory appDirectory = await getApplicationDocumentsDirectory();
-    await appDirectory.create(recursive: true);
-
-    _databasePath = '${appDirectory.path}/app.db';
-    _database = await databaseFactoryIo.openDatabase(_databasePath!);
+    _databasePath = 'games';
+    _database = await databaseFactoryWeb.openDatabase(_databasePath!);
   }
 
+  @override
   Future<void> deleteDatabase() async {
     if (_database != null) {
       await _database!.close();
@@ -28,6 +28,7 @@ class InternalDatabaseService {
     }
   }
 
+  @override
   Database get database {
     if (_database == null) {
       throw Exception('Database not initialized. Call initialize() first.');

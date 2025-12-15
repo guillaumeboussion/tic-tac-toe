@@ -1,9 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:tic_tac_toe_app/constants/route_paths.dart';
 import 'package:tic_tac_toe_app/core/presentation/views/splash_page.dart';
-import 'package:tic_tac_toe_app/features/game/domain/enums/game_opponent.dart';
-import 'package:tic_tac_toe_app/features/game/domain/enums/game_result.dart';
 import 'package:tic_tac_toe_app/features/game/presentation/views/game_history_page.dart';
 import 'package:tic_tac_toe_app/features/game/presentation/views/game_page.dart';
 import 'package:tic_tac_toe_app/features/game/presentation/views/game_result_page.dart';
@@ -32,7 +30,7 @@ class AppRouter extends RootStackRouter {
       page: GameResultRoute.page,
       path: RoutePaths.gameResult,
       transitionsBuilder: TransitionsBuilders.fadeIn,
-      opaque: false,
+      opaque: !kIsWeb,
     ),
     AutoRoute(page: SettingsRoute.page, path: RoutePaths.settings),
     AutoRoute(page: GameHistoryRoute.page, path: RoutePaths.gameHistory),

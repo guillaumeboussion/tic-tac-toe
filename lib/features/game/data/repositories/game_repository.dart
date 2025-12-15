@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sembast/sembast.dart';
 import 'package:tic_tac_toe_app/constants/internal_storage_store_names.dart';
-import 'package:tic_tac_toe_app/core/data/internal_storage_service.dart';
+import 'package:tic_tac_toe_app/core/data/local/internal_storage_service.dart';
 import 'package:tic_tac_toe_app/features/game/domain/entities/game_entity.dart';
 import 'package:tic_tac_toe_app/features/game/domain/repos/i_game_repository.dart';
 

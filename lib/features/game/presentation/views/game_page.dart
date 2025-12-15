@@ -18,6 +18,13 @@ import 'package:tic_tac_toe_app/features/game/presentation/providers/game_timer_
 
 @RoutePage()
 class GamePage extends ConsumerStatefulWidget {
+  const GamePage({
+    @PathParam('opponent') required String opponentParam,
+    super.key,
+  }) : opponent = opponentParam == 'friend'
+           ? GameOpponent.friend
+           : GameOpponent.ai;
+
   final GameOpponent opponent;
 
   const GamePage({required this.opponent, super.key});
