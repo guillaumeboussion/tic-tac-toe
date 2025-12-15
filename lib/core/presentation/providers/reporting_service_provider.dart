@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 final reportingServiceProvider = Provider((ref) => ReportingService());
 
@@ -15,12 +16,25 @@ class ReportingService {
   ];
 
   Future<void> initialize() async {
-    // Should initialize Sentry or any other reporting service here
+    await SentryFlutter.init(
+      (options) {
+        options.environment = kReleaseMode ? 'production' : 'development';
+        options.dsn = const String.fromEnvironment('SENTRY_DSN');
+        options.tracesSampleRate = 0.5;
+      },
+    );
   }
 
   Future<void> captureException(exception, {required StackTrace stackTrace}) async {
-    if (kReleaseMode && !silentExceptions.contains(exception.runtimeType)) {
-      debugPrintStack(stackTrace: stackTrace);
+    if (!silentExceptions.contains(exception.runtimeType)) {
+      if (!kReleaseMode) {
+        debugPrintStack(stackTrace: stackTrace);
+      }
+
+      await Sentry.captureException(
+        exception,
+        stackTrace: stackTrace,
+      );
     }
   }
 }
