@@ -1,0 +1,50 @@
+{
+  "empty_field_error": "This field cannot be empty",
+  "app_title": "Tic Tac Toe",
+  "page_title_tic_tac_toe": "TIC TAC TOE",
+  "ultimate_edition": "⚡ ULTIMATE EDITION ⚡",
+  "select_game_mode": "Select Game Mode",
+  "play_vs_computer": "Play vs Computer",
+  "play_vs_friend": "Play vs Friend",
+  "challenge_the_ai": "Challenge the AI",
+  "local_multiplayer": "Local multiplayer",
+  "lets_play_together": "Let's play together!",
+  "loading_experience": "Loading experience...",
+  "attribution": "by Guillaume Boussion ©",
+  "settings": "Settings",
+  "language": "Language",
+  "current_language": "Current Language",
+  "english": "English",
+  "french": "French",
+  "player_1_turn": "Player 1's Turn",
+  "player_2_turn": "Player 2's Turn",
+  "ai_turn": "AI's Turn",
+  "your_turn": "Your Turn",
+  "trophies": "Trophies",
+  "restart": "Restart",
+  "new_game": "New Game",
+  "back_to_home": "Back to Home",
+  "victory": "VICTORY!",
+  "defeat": "DEFEAT!",
+  "draw": "DRAW!",
+  "game_time": "Game Time",
+  "vs_ai": "VS AI",
+  "vs_friend": "VS FRIEND",
+  "trophies_earned": "+{count} Trophies!",
+  "@trophies_earned": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "game_history": "Game History",
+  "previous_games": "Previous Games",
+  "wins": "Wins",
+  "losses": "Losses",
+  "draws": "Draws",
+  "ai": "AI",
+  "friend": "Friend",
+  "no_games_yet": "No games played yet. Start playing to build your history!",
+  "error_loading_history": "Error loading game history"
+}
