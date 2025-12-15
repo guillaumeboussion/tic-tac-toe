@@ -20,10 +20,7 @@ class StatItem extends StatelessWidget {
 
     return Column(
       children: [
-        AppText.xlBoldTitle(
-          value,
-          color: color,
-        ),
+        AppText.xlBoldTitle(value, color: color),
         SizedBox(height: theme.spacing.semiXs),
         AppText.smallBody(
           label,

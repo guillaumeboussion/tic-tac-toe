@@ -19,25 +19,20 @@ class TextBtnChild extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textPrimaryButtonStyle = AppTheme.of(context).typography.button.primary;
+    final textPrimaryButtonStyle = AppTheme.of(
+      context,
+    ).typography.button.primary;
     final spacing = AppTheme.of(context).spacing;
 
     if (leadingIcon == null && suffixIcon == null) {
-      return Text(
-        text,
-        style: textPrimaryButtonStyle,
-      );
+      return Text(text, style: textPrimaryButtonStyle);
     }
 
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         if (leadingIcon != null) ...[
-          Icon(
-            leadingIcon,
-            size: 18,
-            color: color,
-          ),
+          Icon(leadingIcon, size: 18, color: color),
           SizedBox(width: spacing.small),
         ],
         Flexible(
@@ -48,12 +43,8 @@ class TextBtnChild extends StatelessWidget {
         ),
         if (suffixIcon != null) ...[
           SizedBox(width: spacing.small),
-          Icon(
-            suffixIcon,
-            size: 18,
-            color: color,
-          ),
-        ]
+          Icon(suffixIcon, size: 18, color: color),
+        ],
       ],
     );
   }

@@ -3,18 +3,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tic_tac_toe_app/core/l10n/app_localizations.dart';
 
 /// provider used to access the AppLocalizations object for the current locale
-const supportedLocales = [
-  Locale('en'),
-  Locale('fr'),
-];
+const supportedLocales = [Locale('en'), Locale('fr')];
 
 final selectedL10n = StateProvider<Locale>((ref) {
   // By default the inital locale is the locale of the phone
   //
   // If the locale of the phone isn't implemented for the application we use the french version
-  final phoneLocaleLanguage = Locale(WidgetsBinding.instance.platformDispatcher.locale.languageCode);
+  final phoneLocaleLanguage = Locale(
+    WidgetsBinding.instance.platformDispatcher.locale.languageCode,
+  );
 
-  return supportedLocales.contains(phoneLocaleLanguage) ? phoneLocaleLanguage : supportedLocales.first;
+  return supportedLocales.contains(phoneLocaleLanguage)
+      ? phoneLocaleLanguage
+      : supportedLocales.first;
 });
 
 final l10nProvider = Provider<AppLocalizations>((ref) {
@@ -29,10 +30,16 @@ final l10nProvider = Provider<AppLocalizations>((ref) {
     selectedLocale = null;
   }
 
-  final deviceLocale = Locale(WidgetsBinding.instance.platformDispatcher.locale.languageCode);
+  final deviceLocale = Locale(
+    WidgetsBinding.instance.platformDispatcher.locale.languageCode,
+  );
 
   // Priority: saved locale > device locale > first supported locale
-  final locale = selectedLocale ?? (supportedLocales.contains(deviceLocale) ? deviceLocale : supportedLocales.first);
+  final locale =
+      selectedLocale ??
+      (supportedLocales.contains(deviceLocale)
+          ? deviceLocale
+          : supportedLocales.first);
 
   ref.state = lookupAppLocalizations(locale);
 
@@ -40,8 +47,12 @@ final l10nProvider = Provider<AppLocalizations>((ref) {
   final observer = _LocaleObserver((locales) {
     if (selectedLocale == null) {
       // Only update from device if no saved locale preference
-      final newDeviceLocale = Locale(WidgetsBinding.instance.platformDispatcher.locale.languageCode);
-      final newLocale = supportedLocales.contains(newDeviceLocale) ? newDeviceLocale : supportedLocales.first;
+      final newDeviceLocale = Locale(
+        WidgetsBinding.instance.platformDispatcher.locale.languageCode,
+      );
+      final newLocale = supportedLocales.contains(newDeviceLocale)
+          ? newDeviceLocale
+          : supportedLocales.first;
       ref.state = lookupAppLocalizations(newLocale);
     }
   });

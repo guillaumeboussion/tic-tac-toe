@@ -42,7 +42,9 @@ abstract class _AppBaseTextButton extends StatelessWidget {
             style: getImplementationStyle(context),
             onPressed: onPressed,
             child: BtnChild(
-              color: getImplementationStyle(context).foregroundColor!.resolve({WidgetState.pressed})!,
+              color: getImplementationStyle(
+                context,
+              ).foregroundColor!.resolve({WidgetState.pressed})!,
               leadingIcon: leadingIcon,
               suffixIcon: suffixIcon,
               text: text,
@@ -87,10 +89,19 @@ class AppPrimaryTextButton extends _AppBaseTextButton {
     return TextButton.styleFrom(
       foregroundColor: textColor ?? colors.primaryColor,
       splashFactory: NoSplash.splashFactory,
-      textStyle: bold ? theme.typography.page.smallBoldBody : theme.typography.page.smallBody,
-      padding: padding ?? EdgeInsets.symmetric(horizontal: theme.spacing.big, vertical: theme.spacing.regular),
+      textStyle: bold
+          ? theme.typography.page.smallBoldBody
+          : theme.typography.page.smallBody,
+      padding:
+          padding ??
+          EdgeInsets.symmetric(
+            horizontal: theme.spacing.big,
+            vertical: theme.spacing.regular,
+          ),
       shape: RoundedRectangleBorder(
-        borderRadius: radiusData != null ? BorderRadius.all(radiusData!) : BorderRadius.all(radius),
+        borderRadius: radiusData != null
+            ? BorderRadius.all(radiusData!)
+            : BorderRadius.all(radius),
       ),
     );
   }

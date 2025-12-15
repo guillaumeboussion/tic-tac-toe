@@ -17,10 +17,7 @@ class EmptyHistoryWidget extends ConsumerWidget {
         padding: EdgeInsets.all(theme.spacing.big),
         child: Column(
           children: [
-            const Text(
-              '🎮',
-              style: TextStyle(fontSize: 64),
-            ),
+            const Text('🎮', style: TextStyle(fontSize: 64)),
             SizedBox(height: theme.spacing.regular),
             AppText.regularBody(
               l10n.no_games_yet,

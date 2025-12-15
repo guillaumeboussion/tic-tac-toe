@@ -23,7 +23,8 @@ class LocaleProvider {
     final savedLocale = await _settingsRepository.getLocale();
 
     _ref.read(selectedL10n.notifier).state =
-        savedLocale ?? Locale(WidgetsBinding.instance.platformDispatcher.locale.languageCode);
+        savedLocale ??
+        Locale(WidgetsBinding.instance.platformDispatcher.locale.languageCode);
   }
 
   Future<void> setLocale(Locale locale) async {

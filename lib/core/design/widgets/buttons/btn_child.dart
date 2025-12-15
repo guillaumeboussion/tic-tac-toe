@@ -13,7 +13,10 @@ class BtnChild extends ConsumerWidget {
     this.textStyle,
     this.bold = false,
     super.key,
-  }) : assert((leadingIcon == null || leadingImage == null) && (suffixIcon == null || suffixWidget == null));
+  }) : assert(
+         (leadingIcon == null || leadingImage == null) &&
+             (suffixIcon == null || suffixWidget == null),
+       );
 
   final String text;
   final Color color;
@@ -26,15 +29,24 @@ class BtnChild extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final textPrimaryButtonStyle = AppTheme.of(context).typography.button.primary;
-    final textPrimaryBoldButtonStyle = AppTheme.of(context).typography.button.primary;
+    final textPrimaryButtonStyle = AppTheme.of(
+      context,
+    ).typography.button.primary;
+    final textPrimaryBoldButtonStyle = AppTheme.of(
+      context,
+    ).typography.button.primary;
     final spacing = AppTheme.of(context).spacing;
 
-    if (leadingIcon == null && suffixIcon == null && leadingImage == null && suffixWidget == null) {
+    if (leadingIcon == null &&
+        suffixIcon == null &&
+        leadingImage == null &&
+        suffixWidget == null) {
       return Text(
         text,
         textAlign: TextAlign.center,
-        style: textStyle ?? (!bold ? textPrimaryButtonStyle : textPrimaryBoldButtonStyle),
+        style:
+            textStyle ??
+            (!bold ? textPrimaryButtonStyle : textPrimaryBoldButtonStyle),
       );
     }
 
@@ -42,11 +54,7 @@ class BtnChild extends ConsumerWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (leadingIcon != null) ...[
-          Icon(
-            leadingIcon,
-            size: 18,
-            color: color,
-          ),
+          Icon(leadingIcon, size: 18, color: color),
           SizedBox(width: spacing.small),
         ],
         if (leadingImage != null) ...[
@@ -56,21 +64,19 @@ class BtnChild extends ConsumerWidget {
         Flexible(
           child: Text(
             text,
-            style: textStyle ?? (!bold ? textPrimaryButtonStyle : textPrimaryBoldButtonStyle),
+            style:
+                textStyle ??
+                (!bold ? textPrimaryButtonStyle : textPrimaryBoldButtonStyle),
           ),
         ),
         if (suffixIcon != null) ...[
           SizedBox(width: spacing.small),
-          Icon(
-            suffixIcon,
-            size: 18,
-            color: color,
-          ),
+          Icon(suffixIcon, size: 18, color: color),
         ],
         if (suffixWidget != null) ...[
           SizedBox(width: spacing.small),
           suffixWidget!,
-        ]
+        ],
       ],
     );
   }

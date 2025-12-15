@@ -1,5 +1,1 @@
-enum CellState {
-  empty,
-  playerOne,
-  playerTwo,
-}
+enum CellState { empty, playerOne, playerTwo }

@@ -52,16 +52,16 @@ class GameHistoryPage extends ConsumerWidget {
                       : Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            AppText.mediumBoldTitle(
-                              l10n.previous_games,
-                            ),
+                            AppText.mediumBoldTitle(l10n.previous_games),
                             SizedBox(height: theme.spacing.small),
-                            ...games.map((game) => Padding(
-                                  padding: EdgeInsets.only(
-                                    bottom: theme.spacing.small,
-                                  ),
-                                  child: GameHistoryCard(game: game),
-                                )),
+                            ...games.map(
+                              (game) => Padding(
+                                padding: EdgeInsets.only(
+                                  bottom: theme.spacing.small,
+                                ),
+                                child: GameHistoryCard(game: game),
+                              ),
+                            ),
                           ],
                         ),
                   loading: () => const Center(

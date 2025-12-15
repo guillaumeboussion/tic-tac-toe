@@ -15,10 +15,10 @@ class GameStatistics with _$GameStatistics {
   const GameStatistics._();
 
   factory GameStatistics.empty() => const GameStatistics(
-        totalGames: 0,
-        wins: 0,
-        losses: 0,
-        draws: 0,
-        totalTrophies: 0,
-      );
+    totalGames: 0,
+    wins: 0,
+    losses: 0,
+    draws: 0,
+    totalTrophies: 0,
+  );
 }

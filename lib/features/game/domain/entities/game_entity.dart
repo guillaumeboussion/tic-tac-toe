@@ -16,5 +16,6 @@ class GameEntity with _$GameEntity {
     required GameOpponent opponent,
   }) = _GameEntity;
 
-  factory GameEntity.fromJson(Map<String, dynamic> json) => _$GameEntityFromJson(json);
+  factory GameEntity.fromJson(Map<String, dynamic> json) =>
+      _$GameEntityFromJson(json);
 }

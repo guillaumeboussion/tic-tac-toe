@@ -17,7 +17,8 @@ class SplashPage extends ConsumerStatefulWidget {
   ConsumerState<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends ConsumerState<SplashPage> with TickerProviderStateMixin {
+class _SplashPageState extends ConsumerState<SplashPage>
+    with TickerProviderStateMixin {
   late AnimationController _controller;
   late AnimationController _lottieController;
   late Animation<double> _scaleAnimation;
@@ -28,7 +29,10 @@ class _SplashPageState extends ConsumerState<SplashPage> with TickerProviderStat
   void initState() {
     super.initState();
 
-    _controller = AnimationController(duration: const Duration(milliseconds: 900), vsync: this);
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 900),
+      vsync: this,
+    );
 
     _lottieController = AnimationController(vsync: this);
 
@@ -105,32 +109,60 @@ class _SplashPageState extends ConsumerState<SplashPage> with TickerProviderStat
                                   children: [
                                     Text(
                                       l10n.page_title_tic_tac_toe,
-                                      style: theme.typography.page.xxlBoldTitle.copyWith(
-                                        fontWeight: FontWeight.w900,
-                                        color: theme.colors.primaryText,
-                                        shadows: [
-                                          Shadow(color: Colors.blue.withValues(alpha: 0.6), blurRadius: 30),
-                                          Shadow(color: Colors.blue.withValues(alpha: 0.6), blurRadius: 30),
-                                          Shadow(color: Colors.blue.withValues(alpha: 0.6), blurRadius: 30),
-                                        ],
-                                      ),
+                                      style: theme.typography.page.xxlBoldTitle
+                                          .copyWith(
+                                            fontWeight: FontWeight.w900,
+                                            color: theme.colors.primaryText,
+                                            shadows: [
+                                              Shadow(
+                                                color: Colors.blue.withValues(
+                                                  alpha: 0.6,
+                                                ),
+                                                blurRadius: 30,
+                                              ),
+                                              Shadow(
+                                                color: Colors.blue.withValues(
+                                                  alpha: 0.6,
+                                                ),
+                                                blurRadius: 30,
+                                              ),
+                                              Shadow(
+                                                color: Colors.blue.withValues(
+                                                  alpha: 0.6,
+                                                ),
+                                                blurRadius: 30,
+                                              ),
+                                            ],
+                                          ),
                                     ),
                                     SizedBox(height: theme.spacing.semiSmall),
-                                    AppText.largeBody(l10n.lets_play_together, color: theme.colors.secondaryText),
+                                    AppText.largeBody(
+                                      l10n.lets_play_together,
+                                      color: theme.colors.secondaryText,
+                                    ),
                                   ],
                                 ),
                               ),
                             ],
                           ),
                           Padding(
-                            padding: EdgeInsets.only(bottom: theme.spacing.regular),
+                            padding: EdgeInsets.only(
+                              bottom: theme.spacing.regular,
+                            ),
                             child: Column(
                               children: [
                                 Opacity(
                                   opacity: _contentOpacityAnimation.value,
                                   child: ColorFiltered(
-                                    colorFilter: ColorFilter.mode(theme.colors.playerTwoColor, BlendMode.srcIn),
-                                    child: Lottie.asset(Assets.lottieLoadingDots, width: 100, repeat: true),
+                                    colorFilter: ColorFilter.mode(
+                                      theme.colors.playerTwoColor,
+                                      BlendMode.srcIn,
+                                    ),
+                                    child: Lottie.asset(
+                                      Assets.lottieLoadingDots,
+                                      width: 100,
+                                      repeat: true,
+                                    ),
                                   ),
                                 ),
                                 Opacity(
@@ -141,7 +173,10 @@ class _SplashPageState extends ConsumerState<SplashPage> with TickerProviderStat
                                   ),
                                 ),
                                 SizedBox(height: theme.spacing.huge),
-                                AppText.xxsBody(l10n.attribution, color: theme.colors.primaryText),
+                                AppText.xxsBody(
+                                  l10n.attribution,
+                                  color: theme.colors.primaryText,
+                                ),
                               ],
                             ),
                           ),

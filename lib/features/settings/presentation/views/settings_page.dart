@@ -26,7 +26,10 @@ class SettingsPage extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppText.mediumBoldBody(l10n.language, color: theme.colors.primaryText),
+            AppText.mediumBoldBody(
+              l10n.language,
+              color: theme.colors.primaryText,
+            ),
             SizedBox(height: theme.spacing.regular),
             AppText.smallBody(
               '${l10n.current_language}: ${_getLanguageName(currentLocale, l10n)}',
@@ -68,32 +71,46 @@ class _LocaleOptionTile extends ConsumerWidget {
   final bool isSelected;
   final VoidCallback onTap;
 
-  const _LocaleOptionTile({required this.locale, required this.isSelected, required this.onTap});
+  const _LocaleOptionTile({
+    required this.locale,
+    required this.isSelected,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = AppTheme.of(context);
     final l10n = ref.read(l10nProvider);
 
-    final languageName = locale.languageCode == 'en' ? l10n.english : l10n.french;
+    final languageName = locale.languageCode == 'en'
+        ? l10n.english
+        : l10n.french;
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(theme.spacing.regular),
         decoration: BoxDecoration(
-          color: isSelected ? theme.colors.playerOneColor.withValues(alpha: 0.2) : theme.colors.secondaryColor,
+          color: isSelected
+              ? theme.colors.playerOneColor.withValues(alpha: 0.2)
+              : theme.colors.secondaryColor,
           borderRadius: theme.radius.small.asBorderRadius,
           border: Border.all(
-            color: isSelected ? theme.colors.playerOneColor : theme.colors.inputBorder.withValues(alpha: 0.5),
+            color: isSelected
+                ? theme.colors.playerOneColor
+                : theme.colors.inputBorder.withValues(alpha: 0.5),
             width: isSelected ? 2 : 1,
           ),
         ),
         child: Row(
           children: [
             Icon(
-              isSelected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-              color: isSelected ? theme.colors.playerOneColor : theme.colors.descriptionText,
+              isSelected
+                  ? Icons.radio_button_checked
+                  : Icons.radio_button_unchecked,
+              color: isSelected
+                  ? theme.colors.playerOneColor
+                  : theme.colors.descriptionText,
             ),
             SizedBox(width: theme.spacing.regular),
             AppText.mediumBody(

@@ -93,6 +93,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get draw => 'ÉGALITÉ !';
 
   @override
+  String get player_1_wins => 'JOUEUR 1 GAGNE !';
+
+  @override
+  String get player_2_wins => 'JOUEUR 2 GAGNE !';
+
+  @override
   String get game_time => 'Temps de jeu';
 
   @override
@@ -111,6 +117,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get previous_games => 'Parties précédentes';
+
+  @override
+  String get statistics => 'Statistiques';
 
   @override
   String get wins => 'Victoires';

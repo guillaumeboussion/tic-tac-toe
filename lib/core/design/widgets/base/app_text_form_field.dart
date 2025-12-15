@@ -83,10 +83,9 @@ class AppTextFormField extends StatelessWidget {
       keyboardType: keyboardType,
       validator: validator,
       inputFormatters: inputFormatters,
-      style: textStyle ??
-          theme.typography.page.inputText.copyWith(
-            color: Colors.black,
-          ),
+      style:
+          textStyle ??
+          theme.typography.page.inputText.copyWith(color: Colors.black),
       decoration: InputDecoration(
         hintText: hintText,
         prefixIcon: prefixIcon,

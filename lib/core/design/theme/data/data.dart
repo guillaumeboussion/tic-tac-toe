@@ -14,12 +14,12 @@ class AppThemeData {
   });
 
   factory AppThemeData.regular() => AppThemeData(
-        colors: AppColorsData.light(),
-        typography: AppTypographyData.regular(),
-        spacing: AppSpacingData.regular(),
-        radius: const AppRadiusData.regular(),
-        boxShadows: AppBoxShadowsData.regular(),
-      );
+    colors: AppColorsData.light(),
+    typography: AppTypographyData.regular(),
+    spacing: AppSpacingData.regular(),
+    radius: const AppRadiusData.regular(),
+    boxShadows: AppBoxShadowsData.regular(),
+  );
 
   final AppColorsData colors;
   final AppTypographyData typography;

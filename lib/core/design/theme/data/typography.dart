@@ -5,15 +5,12 @@ abstract class TypographyConstants {
 }
 
 class AppTypographyData {
-  const AppTypographyData({
-    required this.page,
-    required this.button,
-  });
+  const AppTypographyData({required this.page, required this.button});
 
   factory AppTypographyData.regular() => AppTypographyData(
-        page: PageTypographyData.regular(),
-        button: ButtonTypographyData.regular(),
-      );
+    page: PageTypographyData.regular(),
+    button: ButtonTypographyData.regular(),
+  );
 
   final PageTypographyData page;
   final ButtonTypographyData button;
@@ -39,94 +36,94 @@ class PageTypographyData implements TypographyConstants {
   });
 
   factory PageTypographyData.regular() => const PageTypographyData(
-        splashScreenDescription: TextStyle(
-          fontSize: 24,
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w500,
-        ),
-        xxlBoldTitle: TextStyle(
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w700,
-          fontSize: 36,
-          height: 1.15,
-        ),
-        xlBoldTitle: TextStyle(
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w700,
-          fontSize: 32,
-          height: 1.15,
-        ),
-        largeBoldTitle: TextStyle(
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w500,
-          fontSize: 24,
-          height: 1.15,
-        ),
-        largeBody: TextStyle(
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w500,
-          fontSize: 20,
-          height: 1.15,
-        ),
-        mediumBoldTitle: TextStyle(
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w500,
-          fontSize: 20,
-          height: 1.15,
-        ),
-        smallBody: TextStyle(
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w400,
-          fontSize: 14,
-          height: 1.1,
-        ),
-        xsBody: TextStyle(
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w400,
-          fontSize: 12,
-          height: 1.1,
-        ),
-        xxsBody: TextStyle(
-          fontFamily: TypographyConstants.regular,
-          fontSize: 10,
-          height: 1.1,
-        ),
-        smallBoldBody: TextStyle(
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w500,
-          fontSize: 14,
-          height: 1.1,
-        ),
-        regularBody: TextStyle(
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w400,
-          fontSize: 16,
-          height: 1.1,
-        ),
-        regularBoldBody: TextStyle(
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w500,
-          fontSize: 16,
-          height: 1.1,
-        ),
-        mediumBody: TextStyle(
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w400,
-          fontSize: 18,
-          height: 1.1,
-        ),
-        mediumBoldBody: TextStyle(
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w700,
-          fontSize: 18,
-          height: 1.1,
-        ),
-        inputText: TextStyle(
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w400,
-          height: 1.5,
-        ),
-      );
+    splashScreenDescription: TextStyle(
+      fontSize: 24,
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w500,
+    ),
+    xxlBoldTitle: TextStyle(
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w700,
+      fontSize: 36,
+      height: 1.15,
+    ),
+    xlBoldTitle: TextStyle(
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w700,
+      fontSize: 32,
+      height: 1.15,
+    ),
+    largeBoldTitle: TextStyle(
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w500,
+      fontSize: 24,
+      height: 1.15,
+    ),
+    largeBody: TextStyle(
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w500,
+      fontSize: 20,
+      height: 1.15,
+    ),
+    mediumBoldTitle: TextStyle(
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w500,
+      fontSize: 20,
+      height: 1.15,
+    ),
+    smallBody: TextStyle(
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w400,
+      fontSize: 14,
+      height: 1.1,
+    ),
+    xsBody: TextStyle(
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w400,
+      fontSize: 12,
+      height: 1.1,
+    ),
+    xxsBody: TextStyle(
+      fontFamily: TypographyConstants.regular,
+      fontSize: 10,
+      height: 1.1,
+    ),
+    smallBoldBody: TextStyle(
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w500,
+      fontSize: 14,
+      height: 1.1,
+    ),
+    regularBody: TextStyle(
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w400,
+      fontSize: 16,
+      height: 1.1,
+    ),
+    regularBoldBody: TextStyle(
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w500,
+      fontSize: 16,
+      height: 1.1,
+    ),
+    mediumBody: TextStyle(
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w400,
+      fontSize: 18,
+      height: 1.1,
+    ),
+    mediumBoldBody: TextStyle(
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w700,
+      fontSize: 18,
+      height: 1.1,
+    ),
+    inputText: TextStyle(
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w400,
+      height: 1.5,
+    ),
+  );
 
   final TextStyle splashScreenDescription;
   final TextStyle xxlBoldTitle;
@@ -154,31 +151,31 @@ class ButtonTypographyData {
   });
 
   factory ButtonTypographyData.regular() => const ButtonTypographyData(
-        primary: TextStyle(
-          fontSize: 16,
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w700,
-          height: 1.25,
-        ),
-        secondary: TextStyle(
-          fontSize: 16,
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w500,
-          height: 1.25,
-        ),
-        secondaryBold: TextStyle(
-          fontSize: 16,
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w700,
-          height: 1.25,
-        ),
-        text: TextStyle(
-          fontSize: 14,
-          fontFamily: TypographyConstants.regular,
-          fontWeight: FontWeight.w500,
-          height: 1.5,
-        ),
-      );
+    primary: TextStyle(
+      fontSize: 16,
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w700,
+      height: 1.25,
+    ),
+    secondary: TextStyle(
+      fontSize: 16,
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w500,
+      height: 1.25,
+    ),
+    secondaryBold: TextStyle(
+      fontSize: 16,
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w700,
+      height: 1.25,
+    ),
+    text: TextStyle(
+      fontSize: 14,
+      fontFamily: TypographyConstants.regular,
+      fontWeight: FontWeight.w500,
+      height: 1.5,
+    ),
+  );
 
   final TextStyle primary;
   final TextStyle secondary;

@@ -37,9 +37,7 @@ class AppDropdownButton<T> extends StatelessWidget {
         items: elements.map((e) {
           return DropdownMenuItem<T>(
             value: e,
-            child: AppText.smallBody(
-              _getLabel(e),
-            ),
+            child: AppText.smallBody(_getLabel(e)),
           );
         }).toList(),
         onChanged: onChanged,

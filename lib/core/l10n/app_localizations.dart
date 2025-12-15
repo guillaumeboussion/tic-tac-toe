@@ -266,6 +266,18 @@ abstract class AppLocalizations {
   /// **'DRAW!'**
   String get draw;
 
+  /// No description provided for @player_1_wins.
+  ///
+  /// In en, this message translates to:
+  /// **'PLAYER 1 WINS!'**
+  String get player_1_wins;
+
+  /// No description provided for @player_2_wins.
+  ///
+  /// In en, this message translates to:
+  /// **'PLAYER 2 WINS!'**
+  String get player_2_wins;
+
   /// No description provided for @game_time.
   ///
   /// In en, this message translates to:
@@ -301,6 +313,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Previous Games'**
   String get previous_games;
+
+  /// No description provided for @statistics.
+  ///
+  /// In en, this message translates to:
+  /// **'Statistics'**
+  String get statistics;
 
   /// No description provided for @wins.
   ///

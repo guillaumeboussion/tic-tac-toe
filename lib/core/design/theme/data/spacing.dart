@@ -14,16 +14,16 @@ class AppSpacingData {
   });
 
   factory AppSpacingData.regular() => const AppSpacingData(
-        semiXs: 2,
-        xs: 4,
-        semiSmall: 8,
-        small: 12,
-        regular: 16,
-        semiBig: 20,
-        big: 32,
-        semiHuge: 48,
-        huge: 64,
-      );
+    semiXs: 2,
+    xs: 4,
+    semiSmall: 8,
+    small: 12,
+    regular: 16,
+    semiBig: 20,
+    big: 32,
+    semiHuge: 48,
+    huge: 64,
+  );
 
   final double semiXs;
   final double xs;

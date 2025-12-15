@@ -36,7 +36,10 @@ abstract class AppBaseButton extends StatelessWidget {
     this.radiusData,
     this.padding,
     super.key,
-  }) : assert((leadingIcon == null || leadingImage == null) && (suffixIcon == null || suffixWidget == null));
+  }) : assert(
+         (leadingIcon == null || leadingImage == null) &&
+             (suffixIcon == null || suffixWidget == null),
+       );
 
   ButtonStyle getImplementationStyle(BuildContext context);
 
@@ -53,19 +56,25 @@ abstract class AppBaseButton extends StatelessWidget {
         ? Align(
             child: SizedBox.square(
               dimension: 24,
-              child: CircularProgressIndicator(color: AppTheme.of(context).colors.primaryColor),
+              child: CircularProgressIndicator(
+                color: AppTheme.of(context).colors.primaryColor,
+              ),
             ),
           )
         : ElevatedButton(
             style: getImplementationStyle(context),
             onPressed: disabled ? null : onPressed,
             child: BtnChild(
-              color: getImplementationStyle(context).foregroundColor!.resolve({WidgetState.pressed})!,
+              color: getImplementationStyle(
+                context,
+              ).foregroundColor!.resolve({WidgetState.pressed})!,
               leadingIcon: leadingIcon,
               leadingImage: leadingImage,
               suffixIcon: suffixIcon,
               suffixWidget: getSuffixWidget(context),
-              textStyle: getImplementationStyle(context).textStyle!.resolve({WidgetState.pressed}),
+              textStyle: getImplementationStyle(
+                context,
+              ).textStyle!.resolve({WidgetState.pressed}),
               text: text,
               bold: bold,
             ),
@@ -115,12 +124,21 @@ class AppPrimaryButton extends AppBaseButton {
       shadowColor: shadowColor,
       splashFactory: InkRipple.splashFactory,
       textStyle: bold
-          ? theme.typography.page.smallBoldBody.copyWith(fontWeight: FontWeight.w700)
+          ? theme.typography.page.smallBoldBody.copyWith(
+              fontWeight: FontWeight.w700,
+            )
           : theme.typography.page.smallBody,
       backgroundColor: disabled ? null : colors.primaryColor,
-      padding: padding ?? EdgeInsets.symmetric(horizontal: theme.spacing.big, vertical: theme.spacing.semiBig),
+      padding:
+          padding ??
+          EdgeInsets.symmetric(
+            horizontal: theme.spacing.big,
+            vertical: theme.spacing.semiBig,
+          ),
       shape: RoundedRectangleBorder(
-        borderRadius: radiusData != null ? BorderRadius.all(radiusData!) : BorderRadius.all(radius),
+        borderRadius: radiusData != null
+            ? BorderRadius.all(radiusData!)
+            : BorderRadius.all(radius),
       ),
     );
   }
@@ -173,11 +191,20 @@ class AppSecondaryButton extends AppBaseButton {
               fontWeight: FontWeight.w700,
               color: foreground ?? colors.primaryColor,
             )
-          : theme.typography.page.smallBody.copyWith(color: foreground ?? colors.primaryColor),
+          : theme.typography.page.smallBody.copyWith(
+              color: foreground ?? colors.primaryColor,
+            ),
       shadowColor: shadowColor,
-      padding: padding ?? EdgeInsets.symmetric(horizontal: theme.spacing.big, vertical: theme.spacing.semiBig),
+      padding:
+          padding ??
+          EdgeInsets.symmetric(
+            horizontal: theme.spacing.big,
+            vertical: theme.spacing.semiBig,
+          ),
       shape: RoundedRectangleBorder(
-        borderRadius: radiusData != null ? BorderRadius.all(radiusData!) : BorderRadius.all(radius),
+        borderRadius: radiusData != null
+            ? BorderRadius.all(radiusData!)
+            : BorderRadius.all(radius),
       ),
     );
   }
@@ -191,21 +218,35 @@ class AppSecondaryButton extends AppBaseButton {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        borderRadius: radiusData != null ? BorderRadius.all(radiusData!) : BorderRadius.all(radius),
+        borderRadius: radiusData != null
+            ? BorderRadius.all(radiusData!)
+            : BorderRadius.all(radius),
         onTap: busy || disabled ? null : onPressed,
         child: Container(
-          padding: padding ?? EdgeInsets.symmetric(horizontal: theme.spacing.big, vertical: theme.spacing.semiBig),
+          padding:
+              padding ??
+              EdgeInsets.symmetric(
+                horizontal: theme.spacing.big,
+                vertical: theme.spacing.semiBig,
+              ),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [Colors.grey.shade700, Colors.grey.shade800],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             ),
-            borderRadius: radiusData != null ? BorderRadius.all(radiusData!) : BorderRadius.all(radius),
+            borderRadius: radiusData != null
+                ? BorderRadius.all(radiusData!)
+                : BorderRadius.all(radius),
           ),
           child: busy
               ? Align(
-                  child: SizedBox.square(dimension: 24, child: CircularProgressIndicator(color: colors.primaryColor)),
+                  child: SizedBox.square(
+                    dimension: 24,
+                    child: CircularProgressIndicator(
+                      color: colors.primaryColor,
+                    ),
+                  ),
                 )
               : Center(
                   child: BtnChild(
@@ -219,7 +260,9 @@ class AppSecondaryButton extends AppBaseButton {
                             fontWeight: FontWeight.w700,
                             color: foreground ?? colors.primaryText,
                           )
-                        : theme.typography.page.smallBody.copyWith(color: foreground ?? colors.primaryText),
+                        : theme.typography.page.smallBody.copyWith(
+                            color: foreground ?? colors.primaryText,
+                          ),
                     text: text,
                     bold: bold,
                   ),
@@ -273,12 +316,21 @@ class AppOutlinedButton extends AppBaseButton {
       backgroundColor: background,
       minimumSize: const Size(0, 40),
       splashFactory: InkRipple.splashFactory,
-      textStyle: bold ? theme.typography.page.smallBoldBody : theme.typography.page.smallBody,
+      textStyle: bold
+          ? theme.typography.page.smallBoldBody
+          : theme.typography.page.smallBody,
       shadowColor: shadowColor ?? Colors.transparent,
       elevation: shadowColor != null ? 2 : 0,
-      padding: padding ?? EdgeInsets.symmetric(horizontal: theme.spacing.big, vertical: theme.spacing.regular),
+      padding:
+          padding ??
+          EdgeInsets.symmetric(
+            horizontal: theme.spacing.big,
+            vertical: theme.spacing.regular,
+          ),
       shape: RoundedRectangleBorder(
-        borderRadius: radiusData != null ? BorderRadius.all(radiusData!) : BorderRadius.all(radius),
+        borderRadius: radiusData != null
+            ? BorderRadius.all(radiusData!)
+            : BorderRadius.all(radius),
         side: BorderSide(color: colors.primaryColor),
       ),
     );
@@ -312,12 +364,21 @@ class AppSuccessButton extends AppBaseButton {
       shadowColor: shadowColor,
       splashFactory: InkRipple.splashFactory,
       textStyle: bold
-          ? theme.typography.page.smallBoldBody.copyWith(fontWeight: FontWeight.w700)
+          ? theme.typography.page.smallBoldBody.copyWith(
+              fontWeight: FontWeight.w700,
+            )
           : theme.typography.page.smallBody,
       backgroundColor: Colors.transparent,
-      padding: padding ?? EdgeInsets.symmetric(horizontal: theme.spacing.big, vertical: theme.spacing.semiBig),
+      padding:
+          padding ??
+          EdgeInsets.symmetric(
+            horizontal: theme.spacing.big,
+            vertical: theme.spacing.semiBig,
+          ),
       shape: RoundedRectangleBorder(
-        borderRadius: radiusData != null ? BorderRadius.all(radiusData!) : BorderRadius.all(radius),
+        borderRadius: radiusData != null
+            ? BorderRadius.all(radiusData!)
+            : BorderRadius.all(radius),
       ),
     );
   }
@@ -331,21 +392,38 @@ class AppSuccessButton extends AppBaseButton {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        borderRadius: radiusData != null ? BorderRadius.all(radiusData!) : BorderRadius.all(radius),
+        borderRadius: radiusData != null
+            ? BorderRadius.all(radiusData!)
+            : BorderRadius.all(radius),
         onTap: busy || disabled ? null : onPressed,
         child: Container(
-          padding: padding ?? EdgeInsets.symmetric(horizontal: theme.spacing.big, vertical: theme.spacing.semiBig),
+          padding:
+              padding ??
+              EdgeInsets.symmetric(
+                horizontal: theme.spacing.big,
+                vertical: theme.spacing.semiBig,
+              ),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [colors.success, Color.lerp(colors.success, Colors.black, 0.2)!],
+              colors: [
+                colors.success,
+                Color.lerp(colors.success, Colors.black, 0.2)!,
+              ],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             ),
-            borderRadius: radiusData != null ? BorderRadius.all(radiusData!) : BorderRadius.all(radius),
+            borderRadius: radiusData != null
+                ? BorderRadius.all(radiusData!)
+                : BorderRadius.all(radius),
           ),
           child: busy
               ? Align(
-                  child: SizedBox.square(dimension: 24, child: CircularProgressIndicator(color: colors.primaryColor)),
+                  child: SizedBox.square(
+                    dimension: 24,
+                    child: CircularProgressIndicator(
+                      color: colors.primaryColor,
+                    ),
+                  ),
                 )
               : Center(
                   child: BtnChild(
@@ -359,7 +437,9 @@ class AppSuccessButton extends AppBaseButton {
                             fontWeight: FontWeight.w700,
                             color: colors.primaryText,
                           )
-                        : theme.typography.page.smallBody.copyWith(color: colors.primaryText),
+                        : theme.typography.page.smallBody.copyWith(
+                            color: colors.primaryText,
+                          ),
                     text: text,
                     bold: bold,
                   ),

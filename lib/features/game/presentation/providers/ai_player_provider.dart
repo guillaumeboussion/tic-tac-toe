@@ -27,14 +27,18 @@ class AIPlayerProvider {
 
     // Take a corner
     final corners = [0, 2, 6, 8];
-    final availableCorners = corners.where((i) => board[i] == CellState.empty).toList();
+    final availableCorners = corners
+        .where((i) => board[i] == CellState.empty)
+        .toList();
     if (availableCorners.isNotEmpty) {
       return availableCorners[_random.nextInt(availableCorners.length)];
     }
 
     // Take any available edge
     final edges = [1, 3, 5, 7];
-    final availableEdges = edges.where((i) => board[i] == CellState.empty).toList();
+    final availableEdges = edges
+        .where((i) => board[i] == CellState.empty)
+        .toList();
     if (availableEdges.isNotEmpty) {
       return availableEdges[_random.nextInt(availableEdges.length)];
     }

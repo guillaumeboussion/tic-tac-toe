@@ -20,7 +20,8 @@ class HomePage extends ConsumerStatefulWidget {
   ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMixin {
+class _HomePageState extends ConsumerState<HomePage>
+    with TickerProviderStateMixin {
   final _player1Controller = TextEditingController();
   final _player2Controller = TextEditingController();
   late AnimationController _shadowController;
@@ -37,13 +38,9 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
       vsync: this,
     )..repeat(reverse: true);
 
-    _shadowAnimation = Tween<double>(
-      begin: 4.0,
-      end: 8.0,
-    ).animate(CurvedAnimation(
-      parent: _shadowController,
-      curve: Curves.easeInOut,
-    ));
+    _shadowAnimation = Tween<double>(begin: 4.0, end: 8.0).animate(
+      CurvedAnimation(parent: _shadowController, curve: Curves.easeInOut),
+    );
 
     _buttonController = AnimationController(
       duration: const Duration(milliseconds: 1500),
@@ -89,7 +86,10 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: spacing.big, vertical: spacing.regular),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: spacing.big,
+                    vertical: spacing.regular,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -99,7 +99,8 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                           Icons.settings,
                           color: colors.primaryText.withValues(alpha: 0.6),
                         ),
-                        onPressed: () => context.router.pushNamed(RoutePaths.settings),
+                        onPressed: () =>
+                            context.router.pushNamed(RoutePaths.settings),
                       ),
                     ],
                   ),
@@ -139,19 +140,22 @@ class _HomePageState extends ConsumerState<HomePage> with TickerProviderStateMix
                             fontWeight: FontWeight.w600,
                           ),
                           SizedBox(height: spacing.semiHuge),
-                          AppText.mediumBoldBody(l10n.select_game_mode, color: colors.primaryText),
+                          AppText.mediumBoldBody(
+                            l10n.select_game_mode,
+                            color: colors.primaryText,
+                          ),
                           SizedBox(height: spacing.big),
                           SelectGameOpponentWidget(
                             gameOpponent: GameOpponent.ai,
                             onTap: () => context.router.push(
-                              GameRoute(opponent: GameOpponent.ai),
+                              GameRoute(opponentParam: 'ai'),
                             ),
                           ),
                           SizedBox(height: spacing.big),
                           SelectGameOpponentWidget(
                             gameOpponent: GameOpponent.friend,
                             onTap: () => context.router.push(
-                              GameRoute(opponent: GameOpponent.friend),
+                              GameRoute(opponentParam: 'friend'),
                             ),
                           ),
                         ],

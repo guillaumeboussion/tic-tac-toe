@@ -31,22 +31,20 @@ class AppScaffold extends ConsumerWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: centerTitle,
-        title: title ??
-            AppText.regularBoldBody(
-              titleText!,
-              fontWeight: FontWeight.w500,
-            ),
+        title:
+            title ??
+            AppText.regularBoldBody(titleText!, fontWeight: FontWeight.w500),
         leading: IconButton(
           icon: Icon(
-            context.router.current.route.fullscreenDialog ? Icons.close : Icons.arrow_back_ios,
+            context.router.current.route.fullscreenDialog
+                ? Icons.close
+                : Icons.arrow_back_ios,
             color: Colors.black,
           ),
           onPressed: () => context.router.maybePop(),
         ),
       ),
-      body: SafeArea(
-        child: body,
-      ),
+      body: SafeArea(child: body),
     );
   }
 }

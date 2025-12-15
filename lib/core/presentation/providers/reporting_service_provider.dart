@@ -10,31 +10,26 @@ final reportingServiceProvider = Provider((ref) => ReportingService());
 class ReportingService {
   ReportingService();
 
-  static const silentExceptions = [
-    TimeoutException,
-    PathNotFoundException,
-  ];
+  static const silentExceptions = [TimeoutException, PathNotFoundException];
 
   Future<void> initialize() async {
-    await SentryFlutter.init(
-      (options) {
-        options.environment = kReleaseMode ? 'production' : 'development';
-        options.dsn = const String.fromEnvironment('SENTRY_DSN');
-        options.tracesSampleRate = 0.5;
-      },
-    );
+    await SentryFlutter.init((options) {
+      options.environment = kReleaseMode ? 'production' : 'development';
+      options.dsn = const String.fromEnvironment('SENTRY_DSN');
+      options.tracesSampleRate = 0.5;
+    });
   }
 
-  Future<void> captureException(exception, {required StackTrace stackTrace}) async {
+  Future<void> captureException(
+    exception, {
+    required StackTrace stackTrace,
+  }) async {
     if (!silentExceptions.contains(exception.runtimeType)) {
       if (!kReleaseMode) {
         debugPrintStack(stackTrace: stackTrace);
       }
 
-      await Sentry.captureException(
-        exception,
-        stackTrace: stackTrace,
-      );
+      await Sentry.captureException(exception, stackTrace: stackTrace);
     }
   }
 }

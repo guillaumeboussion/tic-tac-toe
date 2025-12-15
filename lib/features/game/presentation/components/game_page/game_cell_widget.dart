@@ -20,7 +20,8 @@ class GameCellWidget extends StatefulWidget {
   State<GameCellWidget> createState() => _GameCellWidgetState();
 }
 
-class _GameCellWidgetState extends State<GameCellWidget> with SingleTickerProviderStateMixin {
+class _GameCellWidgetState extends State<GameCellWidget>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
 
@@ -32,12 +33,10 @@ class _GameCellWidgetState extends State<GameCellWidget> with SingleTickerProvid
       vsync: this,
     );
 
-    _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.elasticOut,
-      ),
-    );
+    _scaleAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticOut));
 
     if (widget.cellState != CellState.empty) {
       _controller.forward();
@@ -47,7 +46,8 @@ class _GameCellWidgetState extends State<GameCellWidget> with SingleTickerProvid
   @override
   void didUpdateWidget(GameCellWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.cellState == CellState.empty && widget.cellState != CellState.empty) {
+    if (oldWidget.cellState == CellState.empty &&
+        widget.cellState != CellState.empty) {
       _controller.forward(from: 0.0);
     }
   }
@@ -68,23 +68,26 @@ class _GameCellWidgetState extends State<GameCellWidget> with SingleTickerProvid
         decoration: BoxDecoration(
           color: widget.isWinningCell
               ? (widget.cellState == CellState.playerOne
-                  ? theme.colors.playerOneColor.withValues(alpha: 0.3)
-                  : theme.colors.playerTwoColor.withValues(alpha: 0.3))
+                    ? theme.colors.playerOneColor.withValues(alpha: 0.3)
+                    : theme.colors.playerTwoColor.withValues(alpha: 0.3))
               : theme.colors.primaryColor,
           borderRadius: theme.radius.small.asBorderRadius,
           border: Border.all(
             color: widget.isWinningCell
-                ? (widget.cellState == CellState.playerOne ? theme.colors.playerOneColor : theme.colors.playerTwoColor)
+                ? (widget.cellState == CellState.playerOne
+                      ? theme.colors.playerOneColor
+                      : theme.colors.playerTwoColor)
                 : theme.colors.inputBorder.withValues(alpha: 0.3),
             width: widget.isWinningCell ? 3 : 1,
           ),
           boxShadow: widget.isWinningCell
               ? [
                   BoxShadow(
-                    color: (widget.cellState == CellState.playerOne
-                            ? theme.colors.playerOneColor
-                            : theme.colors.playerTwoColor)
-                        .withValues(alpha: 0.5),
+                    color:
+                        (widget.cellState == CellState.playerOne
+                                ? theme.colors.playerOneColor
+                                : theme.colors.playerTwoColor)
+                            .withValues(alpha: 0.5),
                     blurRadius: 20,
                     spreadRadius: 2,
                   ),
@@ -96,9 +99,7 @@ class _GameCellWidgetState extends State<GameCellWidget> with SingleTickerProvid
           builder: (context, child) {
             return Transform.scale(
               scale: _scaleAnimation.value,
-              child: Center(
-                child: _buildCellContent(theme),
-              ),
+              child: Center(child: _buildCellContent(theme)),
             );
           },
         ),
@@ -111,11 +112,7 @@ class _GameCellWidgetState extends State<GameCellWidget> with SingleTickerProvid
       case CellState.empty:
         return null;
       case CellState.playerOne:
-        return Icon(
-          Icons.close,
-          size: 48,
-          color: theme.colors.playerOneColor,
-        );
+        return Icon(Icons.close, size: 48, color: theme.colors.playerOneColor);
       case CellState.playerTwo:
         return Icon(
           Icons.radio_button_unchecked,

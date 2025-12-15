@@ -93,6 +93,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get draw => 'DRAW!';
 
   @override
+  String get player_1_wins => 'PLAYER 1 WINS!';
+
+  @override
+  String get player_2_wins => 'PLAYER 2 WINS!';
+
+  @override
   String get game_time => 'Game Time';
 
   @override
@@ -111,6 +117,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get previous_games => 'Previous Games';
+
+  @override
+  String get statistics => 'Statistics';
 
   @override
   String get wins => 'Wins';

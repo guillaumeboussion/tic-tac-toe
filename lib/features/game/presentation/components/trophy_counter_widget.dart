@@ -51,7 +51,9 @@ class TrophyCounterWidget extends ConsumerWidget {
                 height: 12,
                 child: CircularProgressIndicator(
                   strokeWidth: 1.5,
-                  valueColor: AlwaysStoppedAnimation<Color>(theme.colors.trophyColor),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    theme.colors.trophyColor,
+                  ),
                 ),
               ),
               error: (_, __) => AppText.regularBody(

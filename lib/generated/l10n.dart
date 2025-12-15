@@ -18,8 +18,10 @@ class L10n {
   static L10n? _current;
 
   static L10n get current {
-    assert(_current != null,
-        'No instance of L10n was loaded. Try to initialize the L10n delegate before accessing L10n.current.');
+    assert(
+      _current != null,
+      'No instance of L10n was loaded. Try to initialize the L10n delegate before accessing L10n.current.',
+    );
     return _current!;
   }
 
@@ -41,8 +43,10 @@ class L10n {
 
   static L10n of(BuildContext context) {
     final instance = L10n.maybeOf(context);
-    assert(instance != null,
-        'No instance of L10n present in the widget tree. Did you add L10n.delegate in localizationsDelegates?');
+    assert(
+      instance != null,
+      'No instance of L10n present in the widget tree. Did you add L10n.delegate in localizationsDelegates?',
+    );
     return instance!;
   }
 
@@ -62,12 +66,7 @@ class L10n {
 
   /// `Tic Tac Toe`
   String get app_title {
-    return Intl.message(
-      'Tic Tac Toe',
-      name: 'app_title',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Tic Tac Toe', name: 'app_title', desc: '', args: []);
   }
 
   /// `TIC TAC TOE`
@@ -172,22 +171,12 @@ class L10n {
 
   /// `Paramètres`
   String get settings {
-    return Intl.message(
-      'Paramètres',
-      name: 'settings',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Paramètres', name: 'settings', desc: '', args: []);
   }
 
   /// `Langue`
   String get language {
-    return Intl.message(
-      'Langue',
-      name: 'language',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Langue', name: 'language', desc: '', args: []);
   }
 
   /// `Langue actuelle`
@@ -202,22 +191,12 @@ class L10n {
 
   /// `Anglais`
   String get english {
-    return Intl.message(
-      'Anglais',
-      name: 'english',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Anglais', name: 'english', desc: '', args: []);
   }
 
   /// `Français`
   String get french {
-    return Intl.message(
-      'Français',
-      name: 'french',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Français', name: 'french', desc: '', args: []);
   }
 
   /// `Tour du joueur 1`
@@ -242,42 +221,22 @@ class L10n {
 
   /// `Tour de l'IA`
   String get ai_turn {
-    return Intl.message(
-      'Tour de l\'IA',
-      name: 'ai_turn',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Tour de l\'IA', name: 'ai_turn', desc: '', args: []);
   }
 
   /// `Votre tour`
   String get your_turn {
-    return Intl.message(
-      'Votre tour',
-      name: 'your_turn',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Votre tour', name: 'your_turn', desc: '', args: []);
   }
 
   /// `Trophées`
   String get trophies {
-    return Intl.message(
-      'Trophées',
-      name: 'trophies',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Trophées', name: 'trophies', desc: '', args: []);
   }
 
   /// `Recommencer`
   String get restart {
-    return Intl.message(
-      'Recommencer',
-      name: 'restart',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Recommencer', name: 'restart', desc: '', args: []);
   }
 
   /// `Nouvelle partie`
@@ -302,29 +261,34 @@ class L10n {
 
   /// `VICTOIRE !`
   String get victory {
-    return Intl.message(
-      'VICTOIRE !',
-      name: 'victory',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('VICTOIRE !', name: 'victory', desc: '', args: []);
   }
 
   /// `DÉFAITE !`
   String get defeat {
+    return Intl.message('DÉFAITE !', name: 'defeat', desc: '', args: []);
+  }
+
+  /// `ÉGALITÉ !`
+  String get draw {
+    return Intl.message('ÉGALITÉ !', name: 'draw', desc: '', args: []);
+  }
+
+  /// `JOUEUR 1 GAGNE !`
+  String get player_1_wins {
     return Intl.message(
-      'DÉFAITE !',
-      name: 'defeat',
+      'JOUEUR 1 GAGNE !',
+      name: 'player_1_wins',
       desc: '',
       args: [],
     );
   }
 
-  /// `ÉGALITÉ !`
-  String get draw {
+  /// `JOUEUR 2 GAGNE !`
+  String get player_2_wins {
     return Intl.message(
-      'ÉGALITÉ !',
-      name: 'draw',
+      'JOUEUR 2 GAGNE !',
+      name: 'player_2_wins',
       desc: '',
       args: [],
     );
@@ -332,32 +296,17 @@ class L10n {
 
   /// `Temps de jeu`
   String get game_time {
-    return Intl.message(
-      'Temps de jeu',
-      name: 'game_time',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Temps de jeu', name: 'game_time', desc: '', args: []);
   }
 
   /// `VS IA`
   String get vs_ai {
-    return Intl.message(
-      'VS IA',
-      name: 'vs_ai',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('VS IA', name: 'vs_ai', desc: '', args: []);
   }
 
   /// `VS AMI`
   String get vs_friend {
-    return Intl.message(
-      'VS AMI',
-      name: 'vs_friend',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('VS AMI', name: 'vs_friend', desc: '', args: []);
   }
 
   /// `+{count} Trophées !`
@@ -390,54 +339,34 @@ class L10n {
     );
   }
 
+  /// `Statistiques`
+  String get statistics {
+    return Intl.message('Statistiques', name: 'statistics', desc: '', args: []);
+  }
+
   /// `Victoires`
   String get wins {
-    return Intl.message(
-      'Victoires',
-      name: 'wins',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Victoires', name: 'wins', desc: '', args: []);
   }
 
   /// `Défaites`
   String get losses {
-    return Intl.message(
-      'Défaites',
-      name: 'losses',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Défaites', name: 'losses', desc: '', args: []);
   }
 
   /// `Égalités`
   String get draws {
-    return Intl.message(
-      'Égalités',
-      name: 'draws',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Égalités', name: 'draws', desc: '', args: []);
   }
 
   /// `IA`
   String get ai {
-    return Intl.message(
-      'IA',
-      name: 'ai',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('IA', name: 'ai', desc: '', args: []);
   }
 
   /// `Ami`
   String get friend {
-    return Intl.message(
-      'Ami',
-      name: 'friend',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Ami', name: 'friend', desc: '', args: []);
   }
 
   /// `Aucune partie jouée. Commencez à jouer pour construire votre historique !`

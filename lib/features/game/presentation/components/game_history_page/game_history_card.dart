@@ -78,7 +78,10 @@ class GameHistoryCard extends ConsumerWidget {
       decoration: BoxDecoration(
         color: theme.colors.primaryColor.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(theme.radius.small.x),
-        border: Border.all(color: resultColor.withValues(alpha: 0.3), width: 1.5),
+        border: Border.all(
+          color: resultColor.withValues(alpha: 0.3),
+          width: 1.5,
+        ),
       ),
       child: Row(
         children: [
@@ -89,7 +92,12 @@ class GameHistoryCard extends ConsumerWidget {
               color: resultColor.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(theme.radius.small.x),
             ),
-            child: Center(child: Text(_getResultEmoji(game.result), style: const TextStyle(fontSize: 24))),
+            child: Center(
+              child: Text(
+                _getResultEmoji(game.result),
+                style: const TextStyle(fontSize: 24),
+              ),
+            ),
           ),
           SizedBox(width: theme.spacing.small),
           Expanded(
@@ -98,7 +106,10 @@ class GameHistoryCard extends ConsumerWidget {
               children: [
                 Row(
                   children: [
-                    AppText.regularBoldBody(_getResultText(game.result, l10n), color: resultColor),
+                    AppText.regularBoldBody(
+                      _getResultText(game.result, l10n),
+                      color: resultColor,
+                    ),
                     SizedBox(width: theme.spacing.xs),
                     AppText.smallBody(
                       'vs ${_getOpponentText(game.opponent, l10n)}',
@@ -109,7 +120,11 @@ class GameHistoryCard extends ConsumerWidget {
                 SizedBox(height: theme.spacing.semiXs),
                 Row(
                   children: [
-                    Icon(Icons.timer_outlined, size: 14, color: theme.colors.primaryText.withValues(alpha: 0.5)),
+                    Icon(
+                      Icons.timer_outlined,
+                      size: 14,
+                      color: theme.colors.primaryText.withValues(alpha: 0.5),
+                    ),
                     SizedBox(width: theme.spacing.semiXs),
                     AppText.smallBody(
                       _formatDuration(game.partyTime),
@@ -120,19 +135,26 @@ class GameHistoryCard extends ConsumerWidget {
                       Icon(
                         Icons.emoji_events,
                         size: 14,
-                        color: game.trophiesWon! > 0 ? theme.colors.trophyColor : theme.colors.error,
+                        color: game.trophiesWon! > 0
+                            ? theme.colors.trophyColor
+                            : theme.colors.error,
                       ),
                       SizedBox(width: theme.spacing.semiXs),
                       AppText.smallBody(
                         '${game.trophiesWon! > 0 ? '+' : ''}${game.trophiesWon}',
-                        color: game.trophiesWon! > 0 ? theme.colors.trophyColor : theme.colors.error,
+                        color: game.trophiesWon! > 0
+                            ? theme.colors.trophyColor
+                            : theme.colors.error,
                         fontWeight: FontWeight.w600,
                       ),
                     ],
                   ],
                 ),
                 SizedBox(height: theme.spacing.semiXs),
-                AppText.xsBody(_formatDate(game.timestamp), color: theme.colors.primaryText.withValues(alpha: 0.5)),
+                AppText.xsBody(
+                  _formatDate(game.timestamp),
+                  color: theme.colors.primaryText.withValues(alpha: 0.5),
+                ),
               ],
             ),
           ),

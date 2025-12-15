@@ -17,10 +17,13 @@ class SelectGameOpponentWidget extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<SelectGameOpponentWidget> createState() => _SelectGameOpponentWidgetState();
+  ConsumerState<SelectGameOpponentWidget> createState() =>
+      _SelectGameOpponentWidgetState();
 }
 
-class _SelectGameOpponentWidgetState extends ConsumerState<SelectGameOpponentWidget> with TickerProviderStateMixin {
+class _SelectGameOpponentWidgetState
+    extends ConsumerState<SelectGameOpponentWidget>
+    with TickerProviderStateMixin {
   late AnimationController _scaleAnimationController;
   late AnimationController _gradientAnimationController;
   late Animation<double> _scaleAnimation;
@@ -77,18 +80,16 @@ class _SelectGameOpponentWidgetState extends ConsumerState<SelectGameOpponentWid
     return AnimatedBuilder(
       animation: _scaleAnimation,
       builder: (context, child) {
-        return Transform.scale(
-          scale: _scaleAnimation.value,
-          child: child,
-        );
+        return Transform.scale(scale: _scaleAnimation.value, child: child);
       },
       child: GestureDetector(
         onTap: _handleTap,
         child: AnimatedBuilder(
           animation: _gradientAnimation,
           builder: (context, child) {
-            final gradientColor =
-                widget.gameOpponent == GameOpponent.ai ? theme.colors.playerOneColor : theme.colors.friendOpponentColor;
+            final gradientColor = widget.gameOpponent == GameOpponent.ai
+                ? theme.colors.playerOneColor
+                : theme.colors.friendOpponentColor;
 
             return Container(
               padding: EdgeInsets.symmetric(
@@ -106,7 +107,8 @@ class _SelectGameOpponentWidgetState extends ConsumerState<SelectGameOpponentWid
                   ],
                   colors: [
                     theme.colors.secondaryColor,
-                    _gradientAnimation.value < 0.0 || _gradientAnimation.value > 1.0
+                    _gradientAnimation.value < 0.0 ||
+                            _gradientAnimation.value > 1.0
                         ? theme.colors.secondaryColor
                         : gradientColor.withValues(alpha: 0.15),
                     theme.colors.secondaryColor,
@@ -140,7 +142,9 @@ class _SelectGameOpponentWidgetState extends ConsumerState<SelectGameOpponentWid
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                  widget.gameOpponent == GameOpponent.ai ? Icons.computer : Icons.people,
+                  widget.gameOpponent == GameOpponent.ai
+                      ? Icons.computer
+                      : Icons.people,
                   color: widget.gameOpponent == GameOpponent.ai
                       ? theme.colors.playerOneColor
                       : theme.colors.friendOpponentColor,
@@ -153,12 +157,16 @@ class _SelectGameOpponentWidgetState extends ConsumerState<SelectGameOpponentWid
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppText.mediumBoldBody(
-                      widget.gameOpponent == GameOpponent.ai ? l10n.play_vs_computer : l10n.play_vs_friend,
+                      widget.gameOpponent == GameOpponent.ai
+                          ? l10n.play_vs_computer
+                          : l10n.play_vs_friend,
                       color: theme.colors.primaryText,
                     ),
                     SizedBox(height: theme.spacing.xs),
                     AppText.smallBody(
-                      widget.gameOpponent == GameOpponent.ai ? l10n.challenge_the_ai : l10n.local_multiplayer,
+                      widget.gameOpponent == GameOpponent.ai
+                          ? l10n.challenge_the_ai
+                          : l10n.local_multiplayer,
                       color: theme.colors.descriptionText,
                     ),
                   ],

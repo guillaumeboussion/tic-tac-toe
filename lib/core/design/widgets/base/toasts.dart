@@ -58,40 +58,16 @@ class AppToasts extends StatelessWidget {
       switch (toastType) {
         case ToastType.error:
           return _icon != null
-              ? Icon(
-                  _icon,
-                  color: theme.colors.primaryText,
-                  size: 26,
-                )
-              : Icon(
-                  Icons.close,
-                  color: theme.colors.primaryText,
-                  size: 26,
-                );
+              ? Icon(_icon, color: theme.colors.primaryText, size: 26)
+              : Icon(Icons.close, color: theme.colors.primaryText, size: 26);
         case ToastType.success:
           return _icon != null
-              ? Icon(
-                  _icon,
-                  color: theme.colors.primaryText,
-                  size: 26,
-                )
-              : Icon(
-                  Icons.check,
-                  color: theme.colors.primaryText,
-                  size: 26,
-                );
+              ? Icon(_icon, color: theme.colors.primaryText, size: 26)
+              : Icon(Icons.check, color: theme.colors.primaryText, size: 26);
         case ToastType.warning:
           return _icon != null
-              ? Icon(
-                  _icon,
-                  color: theme.colors.primaryText,
-                  size: 26,
-                )
-              : Icon(
-                  Icons.close,
-                  color: theme.colors.primaryText,
-                  size: 26,
-                );
+              ? Icon(_icon, color: theme.colors.primaryText, size: 26)
+              : Icon(Icons.close, color: theme.colors.primaryText, size: 26);
       }
     }();
 
@@ -120,10 +96,7 @@ class AppToasts extends StatelessWidget {
                     color: theme.colors.primaryText,
                   ),
                   SizedBox(height: theme.spacing.xs),
-                  AppText.smallBody(
-                    content,
-                    color: theme.colors.primaryText,
-                  ),
+                  AppText.smallBody(content, color: theme.colors.primaryText),
                 ],
               ),
             ),

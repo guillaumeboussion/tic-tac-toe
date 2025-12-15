@@ -267,7 +267,8 @@ class AppText extends ConsumerWidget {
 
     final TextStyle style = () {
       return switch (level) {
-        AppTextLevel.splashScreenDescription => theme.typography.page.splashScreenDescription,
+        AppTextLevel.splashScreenDescription =>
+          theme.typography.page.splashScreenDescription,
         AppTextLevel.xxlBoldTitle => theme.typography.page.xxlBoldTitle,
         AppTextLevel.xlBoldTitle => theme.typography.page.xlBoldTitle,
         AppTextLevel.largeBoldTitle => theme.typography.page.largeBoldTitle,
