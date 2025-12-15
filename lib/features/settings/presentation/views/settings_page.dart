@@ -5,6 +5,7 @@ import 'package:tic_tac_toe_app/core/design/theme/data/radius.dart';
 import 'package:tic_tac_toe_app/core/design/theme/theme.dart';
 import 'package:tic_tac_toe_app/core/design/widgets/base/scaffold.dart';
 import 'package:tic_tac_toe_app/core/design/widgets/base/text.dart';
+import 'package:tic_tac_toe_app/core/l10n/app_localizations.dart';
 import 'package:tic_tac_toe_app/core/presentation/providers/l10n_provider.dart';
 import 'package:tic_tac_toe_app/features/settings/presentation/providers/locale_provider.dart';
 
@@ -25,10 +26,7 @@ class SettingsPage extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppText.mediumBoldBody(
-              l10n.language,
-              color: theme.colors.primaryText,
-            ),
+            AppText.mediumBoldBody(l10n.language, color: theme.colors.primaryText),
             SizedBox(height: theme.spacing.regular),
             AppText.smallBody(
               '${l10n.current_language}: ${_getLanguageName(currentLocale, l10n)}',
@@ -53,7 +51,7 @@ class SettingsPage extends ConsumerWidget {
     );
   }
 
-  String _getLanguageName(Locale locale, l10n) {
+  String _getLanguageName(Locale locale, AppLocalizations l10n) {
     switch (locale.languageCode) {
       case 'en':
         return l10n.english;
@@ -70,11 +68,7 @@ class _LocaleOptionTile extends ConsumerWidget {
   final bool isSelected;
   final VoidCallback onTap;
 
-  const _LocaleOptionTile({
-    required this.locale,
-    required this.isSelected,
-    required this.onTap,
-  });
+  const _LocaleOptionTile({required this.locale, required this.isSelected, required this.onTap});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

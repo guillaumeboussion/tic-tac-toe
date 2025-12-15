@@ -12,18 +12,12 @@ class SharedPrefsService {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  Future<bool> saveData({
-    required String key,
-    required Object value,
-    required SharedPrefsDataType dataType,
-  }) async {
-    return getSetMethod(sharedPrefsMethod: dataType)(key, value);
+  Future<bool> saveData({required String key, required Object value, required SharedPrefsDataType dataType}) async {
+    // We know that the return type will always be Future<bool>
+    return getSetMethod(sharedPrefsMethod: dataType)(key, value) as Future<bool>;
   }
 
-  Future<dynamic> restoreData({
-    required String key,
-    required SharedPrefsDataType dataType,
-  }) async {
+  Future<dynamic> restoreData({required String key, required SharedPrefsDataType dataType}) async {
     return getGetMethod(sharedPrefsMethod: dataType)(key);
   }
 
