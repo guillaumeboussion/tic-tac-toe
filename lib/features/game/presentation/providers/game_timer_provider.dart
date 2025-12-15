@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final gameTimerProvider =
     StateNotifierProvider.autoDispose<GameTimerNotifier, Duration>((ref) {
-  return GameTimerNotifier();
-});
+      return GameTimerNotifier();
+    });
 
 class GameTimerNotifier extends StateNotifier<Duration> {
   GameTimerNotifier() : super(Duration.zero);

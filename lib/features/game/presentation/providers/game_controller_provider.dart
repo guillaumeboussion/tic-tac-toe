@@ -7,7 +7,7 @@ import 'package:tic_tac_toe_app/features/game/domain/entities/game_entity.dart';
 import 'package:tic_tac_toe_app/features/game/domain/enums/cell_state.dart';
 import 'package:tic_tac_toe_app/features/game/domain/enums/game_opponent.dart';
 import 'package:tic_tac_toe_app/features/game/domain/enums/game_result.dart';
-import 'package:tic_tac_toe_app/features/game/presentation/providers/game_move_handler_provider.dart';
+import 'package:tic_tac_toe_app/features/game/presentation/providers/game_history_provider.dart';
 import 'package:tic_tac_toe_app/features/game/presentation/providers/game_state_provider.dart';
 import 'package:tic_tac_toe_app/features/game/presentation/providers/game_timer_provider.dart';
 import 'package:tic_tac_toe_app/features/game/presentation/providers/trophy_count_provider.dart';
@@ -27,8 +27,9 @@ class GameController {
 
     // If AI is playing and it goes first, trigger its move
     final gameState = _ref.read(gameStateProvider);
-    if (gameState.opponent == GameOpponent.ai && gameState.currentPlayer == CellState.playerTwo) {
-      await _ref.read(gameMoveHandlerProvider).triggerAIMove();
+    if (gameState.opponent == GameOpponent.ai &&
+        gameState.currentPlayer == CellState.playerTwo) {
+      await _ref.read(gameStateProvider.notifier).triggerAIMove();
     }
   }
 
@@ -38,8 +39,9 @@ class GameController {
 
     // If AI is playing and it goes first, trigger its move
     final gameState = _ref.read(gameStateProvider);
-    if (gameState.opponent == GameOpponent.ai && gameState.currentPlayer == CellState.playerTwo) {
-      await _ref.read(gameMoveHandlerProvider).triggerAIMove();
+    if (gameState.opponent == GameOpponent.ai &&
+        gameState.currentPlayer == CellState.playerTwo) {
+      await _ref.read(gameStateProvider.notifier).triggerAIMove();
     }
   }
 
@@ -49,6 +51,9 @@ class GameController {
     final gameRepository = _ref.read(gameRepositoryProvider);
 
     if (gameState is! GameOverState) return null;
+
+    // Prevent duplicate calls
+    if (gameState.hasBeenProcessed) return null;
 
     // Stop timer
     _ref.read(gameTimerProvider.notifier).stop();
@@ -68,10 +73,15 @@ class GameController {
 
       final currentTrophies = await gameRepository.getTrophiesCount();
 
-      await gameRepository.updateTrophiesCount(max(0, currentTrophies + trophiesWon));
+      await gameRepository.updateTrophiesCount(
+        max(0, currentTrophies + trophiesWon),
+      );
 
       _ref.invalidate(trophyCountProvider);
     }
+
+    _ref.invalidate(gameHistoryProvider);
+    _ref.invalidate(gameStatisticsProvider);
 
     // Save game to history
     final gameEntity = GameEntity(
@@ -84,6 +94,9 @@ class GameController {
     );
 
     await gameRepository.addGameToHistory(gameEntity);
+
+    // Mark the game as processed to prevent duplicate handling
+    _ref.read(gameStateProvider.notifier).markAsProcessed();
 
     return GameEndData(
       result: gameState.result,
@@ -98,5 +111,9 @@ class GameEndData {
   final int? trophiesWon;
   final GameOpponent opponent;
 
-  const GameEndData({required this.result, required this.trophiesWon, required this.opponent});
+  const GameEndData({
+    required this.result,
+    required this.trophiesWon,
+    required this.opponent,
+  });
 }
