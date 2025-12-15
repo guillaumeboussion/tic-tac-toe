@@ -13,13 +13,13 @@ class InternalStorageService {
   InternalStorageService({required Ref ref}) : _ref = ref;
 
   Future<void> clearStore(String storeName) async {
-    final database = _ref.read(internalDatabaseService).database;
+    final database = _ref.read(internalDatabaseServiceProvider).database;
     await intMapStoreFactory.store(storeName).drop(database);
   }
 
   Future<void> replaceAll({required JsonArray value, required String storeName}) async {
     final store = intMapStoreFactory.store(storeName);
-    final database = _ref.read(internalDatabaseService).database;
+    final database = _ref.read(internalDatabaseServiceProvider).database;
 
     await store.drop(database);
     await store.addAll(database, value);
@@ -29,7 +29,7 @@ class InternalStorageService {
     final store = intMapStoreFactory.store(storeName);
     final result = <DatabaseRecord>[];
 
-    final database = _ref.read(internalDatabaseService).database;
+    final database = _ref.read(internalDatabaseServiceProvider).database;
     final find = await store.find(database, finder: finder);
 
     if (find.isNotEmpty) {
@@ -43,14 +43,14 @@ class InternalStorageService {
 
   Future<int> count({required String storeName}) async {
     final store = intMapStoreFactory.store(storeName);
-    final database = _ref.read(internalDatabaseService).database;
+    final database = _ref.read(internalDatabaseServiceProvider).database;
 
     return store.count(database);
   }
 
   Future<DatabaseRecord?> getOne({required String storeName, Finder? finder}) async {
     final store = intMapStoreFactory.store(storeName);
-    final database = _ref.read(internalDatabaseService).database;
+    final database = _ref.read(internalDatabaseServiceProvider).database;
 
     final result = await store.findFirst(database, finder: finder);
 
@@ -63,21 +63,21 @@ class InternalStorageService {
 
   Future<void> updateOne({required Json value, required Finder finder, required String storeName}) async {
     final store = intMapStoreFactory.store(storeName);
-    final database = _ref.read(internalDatabaseService).database;
+    final database = _ref.read(internalDatabaseServiceProvider).database;
 
     await store.update(database, value, finder: finder);
   }
 
   Future<void> storeOne({required Json value, required String storeName}) async {
     final store = intMapStoreFactory.store(storeName);
-    final database = _ref.read(internalDatabaseService).database;
+    final database = _ref.read(internalDatabaseServiceProvider).database;
 
     await store.add(database, value);
   }
 
   Future<void> deleteOne({required Finder finder, required String storeName}) async {
     final store = intMapStoreFactory.store(storeName);
-    final database = _ref.read(internalDatabaseService).database;
+    final database = _ref.read(internalDatabaseServiceProvider).database;
 
     await store.delete(database, finder: finder);
   }

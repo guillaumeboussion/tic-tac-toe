@@ -6,7 +6,6 @@ import 'package:tic_tac_toe_app/constants/assets.dart';
 import 'package:tic_tac_toe_app/core/design/theme/theme.dart';
 import 'package:tic_tac_toe_app/core/design/widgets/base/text.dart';
 import 'package:tic_tac_toe_app/core/presentation/providers/l10n_provider.dart';
-import 'package:tic_tac_toe_app/core/presentation/providers/splash_provider.dart';
 import 'package:tic_tac_toe_app/core/presentation/routing/routes.dart';
 import 'package:tic_tac_toe_app/features/game/presentation/views/home_page.dart';
 
@@ -29,50 +28,29 @@ class _SplashPageState extends ConsumerState<SplashPage> with TickerProviderStat
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 900),
-      vsync: this,
-    );
+    _controller = AnimationController(duration: const Duration(milliseconds: 900), vsync: this);
 
     _lottieController = AnimationController(vsync: this);
 
     _scaleAnimation = Tween<double>(
       begin: 1.0,
       end: 10.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInCubic,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInCubic));
 
     _contentOpacityAnimation = TweenSequence<double>([
-      TweenSequenceItem(
-        tween: ConstantTween<double>(1.0),
-        weight: 60,
-      ),
-      TweenSequenceItem(
-        tween: Tween<double>(begin: 1.0, end: 0.0),
-        weight: 40,
-      ),
+      TweenSequenceItem(tween: ConstantTween<double>(1.0), weight: 60),
+      TweenSequenceItem(tween: Tween<double>(begin: 1.0, end: 0.0), weight: 40),
     ]).animate(_controller);
 
     _backgroundOpacityAnimation = TweenSequence<double>([
-      TweenSequenceItem(
-        tween: ConstantTween<double>(1.0),
-        weight: 80,
-      ),
-      TweenSequenceItem(
-        tween: Tween<double>(begin: 1.0, end: 0.0),
-        weight: 20,
-      ),
+      TweenSequenceItem(tween: ConstantTween<double>(1.0), weight: 80),
+      TweenSequenceItem(tween: Tween<double>(begin: 1.0, end: 0.0), weight: 20),
     ]).animate(_controller);
 
     _initializeApp();
   }
 
   Future<void> _initializeApp() async {
-    // Initialize services
-    await ref.read(splashProvider).initialize();
-
     // Wait for splash animation duration
     await Future.delayed(const Duration(milliseconds: 2000));
 
@@ -131,26 +109,14 @@ class _SplashPageState extends ConsumerState<SplashPage> with TickerProviderStat
                                         fontWeight: FontWeight.w900,
                                         color: theme.colors.primaryText,
                                         shadows: [
-                                          Shadow(
-                                            color: Colors.blue.withValues(alpha: 0.6),
-                                            blurRadius: 30,
-                                          ),
-                                          Shadow(
-                                            color: Colors.blue.withValues(alpha: 0.6),
-                                            blurRadius: 30,
-                                          ),
-                                          Shadow(
-                                            color: Colors.blue.withValues(alpha: 0.6),
-                                            blurRadius: 30,
-                                          ),
+                                          Shadow(color: Colors.blue.withValues(alpha: 0.6), blurRadius: 30),
+                                          Shadow(color: Colors.blue.withValues(alpha: 0.6), blurRadius: 30),
+                                          Shadow(color: Colors.blue.withValues(alpha: 0.6), blurRadius: 30),
                                         ],
                                       ),
                                     ),
                                     SizedBox(height: theme.spacing.semiSmall),
-                                    AppText.largeBody(
-                                      l10n.lets_play_together,
-                                      color: theme.colors.secondaryText,
-                                    ),
+                                    AppText.largeBody(l10n.lets_play_together, color: theme.colors.secondaryText),
                                   ],
                                 ),
                               ),
@@ -163,15 +129,8 @@ class _SplashPageState extends ConsumerState<SplashPage> with TickerProviderStat
                                 Opacity(
                                   opacity: _contentOpacityAnimation.value,
                                   child: ColorFiltered(
-                                    colorFilter: ColorFilter.mode(
-                                      theme.colors.playerTwoColor,
-                                      BlendMode.srcIn,
-                                    ),
-                                    child: Lottie.asset(
-                                      Assets.lottieLoadingDots,
-                                      width: 100,
-                                      repeat: true,
-                                    ),
+                                    colorFilter: ColorFilter.mode(theme.colors.playerTwoColor, BlendMode.srcIn),
+                                    child: Lottie.asset(Assets.lottieLoadingDots, width: 100, repeat: true),
                                   ),
                                 ),
                                 Opacity(
@@ -182,10 +141,7 @@ class _SplashPageState extends ConsumerState<SplashPage> with TickerProviderStat
                                   ),
                                 ),
                                 SizedBox(height: theme.spacing.huge),
-                                AppText.xxsBody(
-                                  l10n.attribution,
-                                  color: theme.colors.primaryText,
-                                ),
+                                AppText.xxsBody(l10n.attribution, color: theme.colors.primaryText),
                               ],
                             ),
                           ),

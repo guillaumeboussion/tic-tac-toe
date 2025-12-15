@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast_io.dart';
 
-final internalDatabaseService = Provider((ref) => InternalDatabaseService());
+final internalDatabaseServiceProvider = Provider((ref) => InternalDatabaseService());
 
 class InternalDatabaseService {
   Database? _database;
