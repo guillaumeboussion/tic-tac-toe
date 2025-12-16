@@ -88,7 +88,7 @@ L'application fonctionne parfaitement sur les navigateurs web avec toutes les fo
 ![Démo web](docs/assets/web_demo.gif)
 
 ### Mise en page responsive
-Découvrir comment l'application s'adapte automatiquement aux différentes tailles d'écran et orientations pour offrir la meilleure expérience possible sur n'importe quel appareil.
+L'application s'adapte automatiquement aux différentes tailles d'écran pour s'adapter aux appareils.
 
 ![Démo responsive](docs/assets/web_resize_layout.gif)
 
