@@ -54,7 +54,8 @@ class GameStateNotifier extends AutoDisposeNotifier<GameState> {
   Future<void> makeMove(int index) async {
     if (state is GameOverState ||
         (state is PlayingGameState &&
-            (state as PlayingGameState).isProcessing)) {
+            (state as PlayingGameState).isProcessing &&
+            state.currentPlayer == CellState.playerOne)) {
       return;
     }
     if (state.board[index] != CellState.empty) return;

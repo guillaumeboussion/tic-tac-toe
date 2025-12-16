@@ -27,7 +27,7 @@ class GameController {
 
     // If AI is playing and it goes first, trigger its move
     final gameState = _ref.read(gameStateProvider);
-    if (gameState.opponent == GameOpponent.ai &&
+    if (opponent == GameOpponent.ai &&
         gameState.currentPlayer == CellState.playerTwo) {
       await _ref.read(gameStateProvider.notifier).triggerAIMove();
     }
