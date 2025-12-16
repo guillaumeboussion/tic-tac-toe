@@ -8,6 +8,7 @@ import 'package:tic_tac_toe_app/core/design/theme/data/radius.dart';
 import 'package:tic_tac_toe_app/core/design/theme/theme.dart';
 import 'package:tic_tac_toe_app/core/design/widgets/base/text.dart';
 import 'package:tic_tac_toe_app/core/design/widgets/buttons/app_button.dart';
+import 'package:tic_tac_toe_app/core/presentation/components/bouncing_animated_widget.dart';
 import 'package:tic_tac_toe_app/core/presentation/providers/l10n_provider.dart';
 import 'package:tic_tac_toe_app/core/presentation/routing/routes.dart';
 import 'package:tic_tac_toe_app/features/game/domain/enums/game_opponent.dart';
@@ -140,13 +141,21 @@ class _GameResultPageState extends ConsumerState<GameResultPage>
     }
   }
 
-  void _handleNewGame() {
-    ref.read(gameControllerProvider).resetGame();
-    context.router.back();
+  Future<void> _handleNewGame() async {
+    await Future.delayed(const Duration(milliseconds: 300));
+    await ref.read(gameControllerProvider).resetGame();
+
+    if (mounted) {
+      context.router.back();
+    }
   }
 
-  void _handleBackToHome() {
-    context.router.popUntil((route) => route.settings.name == HomeRoute.name);
+  Future<void> _handleBackToHome() async {
+    await Future.delayed(const Duration(milliseconds: 300));
+
+    if (mounted) {
+      context.router.popUntil((route) => route.settings.name == HomeRoute.name);
+    }
   }
 
   @override
@@ -282,16 +291,20 @@ class _GameResultPageState extends ConsumerState<GameResultPage>
                           opacity: _fadeAnimation,
                           child: Column(
                             children: [
-                              AppSuccessButton(
-                                text: l10n.new_game,
-                                onPressed: _handleNewGame,
-                                leadingIcon: Icons.replay,
+                              BouncingAnimatedWidget(
+                                child: AppSuccessButton(
+                                  text: l10n.new_game,
+                                  onPressed: _handleNewGame,
+                                  leadingIcon: Icons.replay,
+                                ),
                               ),
                               SizedBox(height: theme.spacing.regular),
-                              AppSecondaryButton.bold(
-                                text: l10n.back_to_home,
-                                onPressed: _handleBackToHome,
-                                leadingIcon: Icons.home,
+                              BouncingAnimatedWidget(
+                                child: AppSecondaryButton.bold(
+                                  text: l10n.back_to_home,
+                                  onPressed: _handleBackToHome,
+                                  leadingIcon: Icons.home,
+                                ),
                               ),
                             ],
                           ),
