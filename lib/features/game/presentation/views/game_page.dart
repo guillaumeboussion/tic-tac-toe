@@ -265,7 +265,7 @@ class _GamePageState extends ConsumerState<GamePage>
                               cellState: cellState,
                               isWinningCell: isWinningCell,
                               onTap: () => ref
-                                  .read(gameStateProvider.notifier)
+                                  .read(gameControllerProvider)
                                   .handleCellTap(index),
                             );
                           },

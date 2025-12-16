@@ -45,6 +45,10 @@ class GameController {
     }
   }
 
+  Future<void> handleCellTap(int index) async {
+    await _ref.read(gameStateProvider.notifier).handleCellTap(index);
+  }
+
   Future<GameEndData?> handleGameEnd() async {
     final gameState = _ref.read(gameStateProvider);
     final gameDuration = _ref.read(gameTimerProvider);
