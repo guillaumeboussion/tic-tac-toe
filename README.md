@@ -9,8 +9,8 @@ Une application de morpion moderne et interactive développée avec Flutter.
 ## ✨ Fonctionnalités
 
 ### 🎯 Modes de jeu
-- **Joueur vs Joueur** : Jouez avec un ami en local sur le même appareil
-- **Joueur vs IA** : Défiez l'ordinateur avec un algorithme intelligent
+- **Joueur vs Joueur** : Jouer avec un ami en local sur le même appareil
+- **Joueur vs IA** : Défier l'ordinateur avec un algorithme intelligent
 
 ### 🎨 Interface utilisateur
 - Design moderne avec des animations fluides
@@ -19,10 +19,10 @@ Une application de morpion moderne et interactive développée avec Flutter.
 - Interface responsive qui s'adapte à tous les écrans
 
 ### 📊 Statistiques et historique
-- Consultez l'historique complet de toutes vos parties
-- Gagnez des trophées à chaque victoire
-- Accédez à vos statistiques personnalisées (victoires, défaites, matchs nuls)
-- Visualisez le temps de jeu pour chaque partie
+- Consulter l'historique complet de toutes vos parties
+- Gagner des trophées à chaque victoire
+- Accéder à vos statistiques personnalisées (victoires, défaites, matchs nuls)
+- Visualiser le temps de jeu pour chaque partie
 
 ### 🌍 Internationalisation
 - Disponible en plusieurs langues (français/anglais)
@@ -61,24 +61,24 @@ Les tests de widgets n'ont pas pu être réalisés par manque de temps, mais con
 ## 🎬 Démonstrations
 
 ### Partie en local
-Découvrez le gameplay fluide en mode joueur contre joueur. Les joueurs placent leurs marques à tour de rôle avec des animations soignées.
+Découvrir le gameplay fluide en mode joueur contre joueur. Les joueurs placent leurs marques à tour de rôle avec des animations soignées.
 
-![Démo partie locale](docs/assets/local_game.gif)
+<img src="docs/assets/local_game.gif" alt="Démo partie locale" height="500"/>
 
 ### Victoire
 L'animation de célébration se déclenche lorsque vous remportez la partie. L'application met en évidence votre combinaison gagnante avec des effets spéciaux.
 
-![Démo victoire](docs/assets/game_victory.gif)
+<img src="docs/assets/game_victory.gif" alt="Démo victoire" height="500"/>
 
 ### Historique des parties
-Retrouvez toutes vos parties précédentes dans l'historique complet. Consultez vos statistiques détaillées avec les résultats, horodatages et métriques de performance.
+Retrouver toutes vos parties précédentes dans l'historique complet. Consulter vos statistiques détaillées avec les résultats, horodatages et métriques de performance.
 
-![Démo historique](docs/assets/game_history.gif)
+<img src="docs/assets/game_history.gif" alt="Démo historique" height="500"/>
 
 ### Changement de langue
-L'application est disponible en plusieurs langues avec un changement instantané. Passez du français à l'anglais sans redémarrer l'application.
+L'application est disponible en plusieurs langues avec un changement instantané. Passer du français à l'anglais sans redémarrer l'application.
 
-![Démo changement de langue](docs/assets/lang_switch.gif)
+<img src="docs/assets/lang_switch.gif" alt="Démo changement de langue" height="500"/>
 
 ### Version web
 L'application fonctionne parfaitement sur les navigateurs web avec toutes les fonctionnalités et un design responsive.
@@ -86,13 +86,13 @@ L'application fonctionne parfaitement sur les navigateurs web avec toutes les fo
 ![Démo web](docs/assets/web_demo.gif)
 
 ### Mise en page responsive
-Découvrez comment l'application s'adapte automatiquement aux différentes tailles d'écran et orientations pour vous offrir la meilleure expérience possible sur n'importe quel appareil.
+Découvrir comment l'application s'adapte automatiquement aux différentes tailles d'écran et orientations pour offrir la meilleure expérience possible sur n'importe quel appareil.
 
 ![Démo responsive](docs/assets/web_resize_layout.gif)
 
 ## 💡 Évolutions possibles
 
-Cette application pourrait être enrichie avec les fonctionnalités suivantes pour vous offrir une expérience encore plus complète :
+Cette application pourrait être enrichie avec les fonctionnalités suivantes pour offrir une expérience encore plus complète :
 
 ### 🔐 Système d'authentification
 - Social Auth (Google, Apple, Facebook)
@@ -100,7 +100,7 @@ Cette application pourrait être enrichie avec les fonctionnalités suivantes po
 - Synchronisation de vos données entre tous vos appareils
 
 ### 🌐 Mode multijoueur en ligne
-- Affrontez d'autres joueurs en temps réel
+- Affronter d'autres joueurs en temps réel
 - Système de matchmaking pour trouver des adversaires
 - Chat intégré pendant vos parties
 - Liste d'amis et système d'invitations
@@ -118,21 +118,21 @@ Cette application pourrait être enrichie avec les fonctionnalités suivantes po
 - Offres spéciales et promotions
 
 ### 🎨 Personnalisation
-- Créez votre avatar personnalisé
-- Choisissez parmi différents thèmes de plateau
-- Personnalisez vos symboles (X et O)
+- Créer votre avatar personnalisé
+- Choisir parmi différents thèmes de plateau
+- Personnaliser vos symboles (X et O)
 - Ajout d'effets sonores et de musiques d'ambiance
 
 ### 🔔 Notifications push
-- Recevez des rappels pour revenir jouer
-- Soyez notifié des défis quotidiens
+- Recevoir des rappels pour revenir jouer
+- Être notifié des défis quotidiens
 - Alertes pour vos parties en attente
 - Notifications de vos nouveaux records personnels
 - Messages de réengagement personnalisés
 
 ### 📈 Analyse et engagement
-- Relevez des défis quotidiens et hebdomadaires
-- Participez aux événements saisonniers et tournois
+- Relever des défis quotidiens et hebdomadaires
+- Participer aux événements saisonniers et tournois
 
 ### 💰 Monétisation
 - Achats in-app (tickets, thèmes, avatars)
