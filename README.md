@@ -33,6 +33,7 @@ Une application de morpion moderne et interactive développée avec Flutter.
 - Clean architecture avec séparation des responsabilités
 - State management avec [Riverpod](https://pub.dev/packages/flutter_riverpod)
 - Navigation fluide avec [AutoRoute](https://pub.dev/packages/auto_route)
+- Reporting des erreurs avec [Sentry](https://pub.dev/packages/sentry_flutter) pour un suivi en temps réel
 - Timer intégré pour chronométrer vos parties
 
 ##  Dépendances principales
@@ -43,6 +44,7 @@ Une application de morpion moderne et interactive développée avec Flutter.
 - **shared_preferences** : Stockage de données simples
 - **sembast** & **sembast_web** : Base de données NoSQL pour le stockage local
 - **intl** : Internationalisation et localisation
+- **sentry_flutter** : Reporting d'erreurs et monitoring
 
 ## 📱 Plateformes supportées
 
