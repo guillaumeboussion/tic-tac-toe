@@ -2,6 +2,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:tic_tac_toe_app/features/game/domain/repos/i_game_repository.dart';
+import 'package:tic_tac_toe_app/features/game/presentation/providers/ai_player_provider.dart';
 import 'package:tic_tac_toe_app/features/game/presentation/providers/game_state_provider.dart';
 import 'package:tic_tac_toe_app/features/game/presentation/providers/game_timer_provider.dart';
 
@@ -24,3 +25,5 @@ class MockGameTimerNotifier extends AutoDisposeNotifier<Duration>
 }
 
 class MockIGameRepository extends Mock implements IGameRepository {}
+
+class MockAIPlayer extends Mock implements AIPlayerProvider {}

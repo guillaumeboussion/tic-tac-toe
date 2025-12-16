@@ -51,11 +51,10 @@ class GameStateNotifier extends AutoDisposeNotifier<GameState> {
     return _random.nextBool() ? CellState.playerOne : CellState.playerTwo;
   }
 
-  Future<void> makeMove(int index, GameOpponent playerType) async {
+  Future<void> makeMove(int index) async {
     if (state is GameOverState ||
         (state is PlayingGameState &&
-            (state as PlayingGameState).isProcessing &&
-            playerType != GameOpponent.ai)) {
+            (state as PlayingGameState).isProcessing)) {
       return;
     }
     if (state.board[index] != CellState.empty) return;
@@ -145,7 +144,7 @@ class GameStateNotifier extends AutoDisposeNotifier<GameState> {
     if (state.board[index] != CellState.empty) return;
 
     // Make the player's move
-    await makeMove(index, GameOpponent.friend);
+    await makeMove(index);
 
     // If AI opponent and it's AI's turn, trigger AI move
     if (state is! GameOverState &&
@@ -167,7 +166,7 @@ class GameStateNotifier extends AutoDisposeNotifier<GameState> {
     final aiPlayer = ref.read(aiPlayerProvider);
     final aiMove = aiPlayer.getBestMove(state.board);
 
-    await makeMove(aiMove, GameOpponent.ai);
+    await makeMove(aiMove);
 
     setProcessing(false);
   }
