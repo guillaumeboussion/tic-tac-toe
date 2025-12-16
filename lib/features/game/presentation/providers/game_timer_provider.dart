@@ -3,14 +3,20 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final gameTimerProvider =
-    StateNotifierProvider.autoDispose<GameTimerNotifier, Duration>((ref) {
+    NotifierProvider.autoDispose<GameTimerNotifier, Duration>(() {
       return GameTimerNotifier();
     });
 
-class GameTimerNotifier extends StateNotifier<Duration> {
-  GameTimerNotifier() : super(Duration.zero);
-
+class GameTimerNotifier extends AutoDisposeNotifier<Duration> {
   Timer? _timer;
+
+  @override
+  Duration build() {
+    ref.onDispose(() {
+      _timer?.cancel();
+    });
+    return Duration.zero;
+  }
 
   void start() {
     reset();
@@ -28,11 +34,5 @@ class GameTimerNotifier extends StateNotifier<Duration> {
   void reset() {
     stop();
     state = Duration.zero;
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
   }
 }

@@ -5,13 +5,13 @@ import 'package:tic_tac_toe_app/features/game/domain/entities/game_statistics.da
 import 'package:tic_tac_toe_app/features/game/domain/enums/game_result.dart';
 
 final gameHistoryProvider = FutureProvider<List<GameEntity>>((ref) async {
-  final repository = ref.watch(gameRepositoryProvider);
+  final repository = ref.read(gameRepositoryProvider);
   final history = await repository.getGameHistory();
   return history..sort((a, b) => b.timestamp.compareTo(a.timestamp));
 });
 
 final gameStatisticsProvider = FutureProvider<GameStatistics>((ref) async {
-  final repository = ref.watch(gameRepositoryProvider);
+  final repository = ref.read(gameRepositoryProvider);
   final history = await repository.getGameHistory();
   final trophyCount = await repository.getTrophiesCount();
 

@@ -10,22 +10,21 @@ import 'package:tic_tac_toe_app/features/game/presentation/providers/ai_player_p
 part 'game_state_provider.freezed.dart';
 
 final gameStateProvider =
-    StateNotifierProvider.autoDispose<GameStateNotifier, GameState>((ref) {
-      return GameStateNotifier(ref);
+    NotifierProvider.autoDispose<GameStateNotifier, GameState>(() {
+      return GameStateNotifier();
     });
 
-class GameStateNotifier extends StateNotifier<GameState> {
-  final Ref _ref;
+class GameStateNotifier extends AutoDisposeNotifier<GameState> {
   final Random _random = Random();
 
-  GameStateNotifier(this._ref)
-    : super(
-        GameState.playing(
-          board: List.filled(9, CellState.empty),
-          currentPlayer: CellState.playerOne,
-          opponent: GameOpponent.ai,
-        ),
-      );
+  @override
+  GameState build() {
+    return GameState.playing(
+      board: List.filled(9, CellState.empty),
+      currentPlayer: CellState.playerOne,
+      opponent: GameOpponent.ai,
+    );
+  }
 
   void initializeGame(GameOpponent opponent) {
     // Randomly select first player when playing against AI
@@ -165,7 +164,7 @@ class GameStateNotifier extends StateNotifier<GameState> {
     await Future.delayed(Duration(milliseconds: delayMs));
 
     // Get AI's best move
-    final aiPlayer = _ref.read(aiPlayerProvider);
+    final aiPlayer = ref.read(aiPlayerProvider);
     final aiMove = aiPlayer.getBestMove(state.board);
 
     await makeMove(aiMove, GameOpponent.ai);
