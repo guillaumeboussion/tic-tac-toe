@@ -56,27 +56,27 @@ Le projet inclut des tests unitaires pour les composants critiques de l'applicat
 - Tests du provider de jeu ([game_state_provider_test.dart](test/features/game/presentation/providers/game_state_provider_test.dart))
 - Tests du repository ([game_repository_test.dart](test/features/game/data/repositories/game_repository_test.dart))
 
-Les tests de widgets n'ont pas pu être réalisés par manque de temps, mais constituent une évolution recommandée pour garantir la qualité de l'interface utilisateur.
+Les tests de widgets n'ont pas pu être réalisés par manque de temps, mais constituent une évolution possible pour garantir la qualité de l'interface utilisateur.
 
 ## 🎬 Démonstrations
 
 ### Partie en local
-Découvrir le gameplay fluide en mode joueur contre joueur. Les joueurs placent leurs marques à tour de rôle avec des animations soignées.
+Possibilité de jouer également avec un ami en local, avec une animation de victoire dans les couleurs du gagnant (couleurs différentes de la victoire contre IA)
 
 <img src="docs/assets/local_game.gif" alt="Démo partie locale" height="500"/>
 
 ### Victoire
-L'animation de célébration se déclenche lorsque vous remportez la partie. L'application met en évidence votre combinaison gagnante avec des effets spéciaux.
+Des animations sur les widgets + lottie sont présentes pour la victoire, en local ou contre l'IA
 
 <img src="docs/assets/game_victory.gif" alt="Démo victoire" height="500"/>
 
 ### Historique des parties
-Retrouver toutes vos parties précédentes dans l'historique complet. Consulter vos statistiques détaillées avec les résultats, horodatages et métriques de performance.
+Possibilité de consulter l'ensemble des parties passées, statistiques de victoires, matchs nul, défaites, avec détail de chaque partie
 
 <img src="docs/assets/game_history.gif" alt="Démo historique" height="500"/>
 
 ### Changement de langue
-L'application est disponible en plusieurs langues avec un changement instantané. Passer du français à l'anglais sans redémarrer l'application.
+L'application est disponible en plusieurs langues avec un changement instantané. Il est possible de passer du français à l'anglais sans redémarrer l'application.
 
 <img src="docs/assets/lang_switch.gif" alt="Démo changement de langue" height="500"/>
 
@@ -92,7 +92,7 @@ Découvrir comment l'application s'adapte automatiquement aux différentes taill
 
 ## 💡 Évolutions possibles
 
-Cette application pourrait être enrichie avec les fonctionnalités suivantes pour offrir une expérience encore plus complète :
+Cette application pourrait être enrichie avec les fonctionnalités suivantes pour offrir une expérience gamifiée encore plus complète :
 
 ### 🔐 Système d'authentification
 - Social Auth (Google, Apple, Facebook)
