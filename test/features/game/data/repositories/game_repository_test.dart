@@ -24,6 +24,8 @@ void main() {
     setUp(() {
       mockInternalStorageService = MockInternalStorageService();
       repository = GameRepository(mockInternalStorageService);
+
+      reset(mockInternalStorageService);
     });
 
     group('[getTrophiesCount]', () {
@@ -154,6 +156,7 @@ void main() {
           verify(
             () => mockInternalStorageService.get(
               storeName: InternalStorageStoreNames.gameStore,
+              finder: any(named: 'finder'),
             ),
           ).called(1);
         },
@@ -166,6 +169,7 @@ void main() {
           when(
             () => mockInternalStorageService.get(
               storeName: InternalStorageStoreNames.gameStore,
+              finder: any(named: 'finder'),
             ),
           ).thenAnswer((_) async => []);
 
